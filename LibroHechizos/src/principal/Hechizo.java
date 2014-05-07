@@ -6,6 +6,7 @@ public class Hechizo {
 	 * Nombre normal del hechizo
 	 */
 	private String nombre;
+	//Prueba
 	/**
 	 * Escuela a la que pertenece el hechizo
 	 */
