@@ -34,9 +34,9 @@ public class Hechizo {
 	/**
 	 * Distancia máxima a la que puede lanzarse un conjuro.
 	 */
-	private Distancia distMax;
+	private Alcance alcance;
 	/**
 	 * Duración del conjuro
 	 */
-	private Duracion duracion;
+	//private Duracion duracion;
 }

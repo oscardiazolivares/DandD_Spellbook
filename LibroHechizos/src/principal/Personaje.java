@@ -138,7 +138,7 @@ public class Personaje {
 	private int[] calcularConjurosDiarios() {
 
 		int[] conjurosDiarios = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-
+		//Crear matriz final, y sacar filas en funcion del nivel
 		if (getClase() == Clase.MAGO) {
 			switch (getNivel()) {
 			case 1:
