@@ -20,11 +20,23 @@ public class Hechizo {
 	 */
 	private String descriptor; //fuego, sónico, enajenador...
 	/**
-	 * Nivel del hechizo para Magos.
+	 * Nivel del hechizo para Magos y Hechiceros (de 0 a 9).
 	 */
-	private short nivel;
+	private short nivelMago;
 	/**
 	 * Descripción completa del hechizo
 	 */
 	private String descripcion;
+	/**
+	 * Tipo de acción necesaria para ejecutar el sortilegio.
+	 */
+	private TiempoLanzamiento tiempoLanzamiento;
+	/**
+	 * Distancia máxima a la que puede lanzarse un conjuro.
+	 */
+	private Distancia distMax;
+	/**
+	 * Duración del conjuro
+	 */
+	private Duracion duracion;
 }
