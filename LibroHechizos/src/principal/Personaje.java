@@ -8,6 +8,80 @@ package principal;
  */
 public class Personaje {
 
+	/**
+	 * Tabla de conjuros diarios para mago por nivel de lanzador. 
+	 * Columnas - niveles de conjuro, del 0 al 9.
+	 * Filas - nivel de lanzador
+	 */
+	private final int[][] CONJUROS_DIARIOS_MAGO = new int[][] {
+			{ 3, 1, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 4, 2, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 4, 2, 1, 0, 0, 0, 0, 0, 0, 0 },
+			{ 4, 3, 1, 0, 0, 0, 0, 0, 0, 0 },
+			{ 4, 3, 2, 1, 0, 0, 0, 0, 0, 0 },
+			{ 4, 3, 3, 2, 0, 0, 0, 0, 0, 0 },
+			{ 4, 4, 3, 2, 1, 0, 0, 0, 0, 0 },
+			{ 4, 4, 3, 3, 2, 0, 0, 0, 0, 0 },
+			{ 4, 4, 4, 3, 2, 1, 0, 0, 0, 0 },
+			{ 4, 4, 4, 3, 3, 2, 0, 0, 0, 0 },
+			{ 4, 4, 4, 4, 3, 2, 1, 0, 0, 0 },
+			{ 4, 4, 4, 4, 3, 3, 2, 0, 0, 0 },
+			{ 4, 4, 4, 4, 4, 3, 2, 1, 0, 0 },
+			{ 4, 4, 4, 4, 4, 3, 3, 2, 0, 0 },
+			{ 4, 4, 4, 4, 4, 4, 3, 2, 1, 0 },
+			{ 4, 4, 4, 4, 4, 4, 3, 3, 2, 0 },
+			{ 4, 4, 4, 4, 4, 4, 4, 3, 2, 1 },
+			{ 4, 4, 4, 4, 4, 4, 4, 3, 3, 2 },
+			{ 4, 4, 4, 4, 4, 4, 4, 4, 3, 3 },
+			{ 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 }
+	};
+	
+	/**
+	 * Tabla de conjuros diarios para hechicero por nivel de lanzador. 
+	 * Columnas - niveles de conjuro, del 0 al 9.
+	 * Filas - nivel de lanzador
+	 */
+	private final int[][] CONJUROS_DIARIOS_HECHICERO = new int[][] {
+			{ 5, 3, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 6, 4, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 6, 5, 0, 0, 0, 0, 0, 0, 0, 0 },
+			{ 6, 6, 3, 0, 0, 0, 0, 0, 0, 0 },
+			{ 6, 6, 4, 0, 0, 0, 0, 0, 0, 0 },
+			{ 6, 6, 5, 3, 0, 0, 0, 0, 0, 0 },
+			{ 6, 6, 6, 4, 0, 0, 0, 0, 0, 0 },
+			{ 6, 6, 6, 5, 3, 0, 0, 0, 0, 0 },
+			{ 6, 6, 6, 6, 4, 0, 0, 0, 0, 0 },
+			{ 6, 6, 6, 6, 5, 3, 0, 0, 0, 0 },
+			{ 6, 6, 6, 6, 6, 4, 0, 0, 0, 0 },
+			{ 6, 6, 6, 6, 6, 5, 3, 0, 0, 0 },
+			{ 6, 6, 6, 6, 6, 6, 4, 0, 0, 0 },
+			{ 6, 6, 6, 6, 6, 6, 5, 3, 0, 0 },
+			{ 6, 6, 6, 6, 6, 6, 6, 4, 0, 0 },
+			{ 6, 6, 6, 6, 6, 6, 6, 5, 3, 0 },
+			{ 6, 6, 6, 6, 6, 6, 6, 6, 4, 0 },
+			{ 6, 6, 6, 6, 6, 6, 6, 6, 5, 3 },
+			{ 6, 6, 6, 6, 6, 6, 6, 6, 6, 4 },
+			{ 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 }
+	};
+	
+	/**
+	 * Tabla de conjuros adicionales para los lanzadores de conjuros.
+	 * Columnas - niveles de conjuro, del 0 al 9.
+	 * Filas - nivel de lanzador
+	 */
+	private final int[][] CONJUROS_ADICIONALES = new int[][] {
+			{0,1,0,0,0,0,0,0,0,0},
+			{0,1,1,0,0,0,0,0,0,0},
+			{0,1,1,1,0,0,0,0,0,0},
+			{0,1,1,1,1,0,0,0,0,0},
+			{0,2,1,1,1,1,0,0,0,0},
+			{0,2,2,1,1,1,1,0,0,0},
+			{0,2,2,2,1,1,1,1,0,0},
+			{0,2,2,2,2,1,1,1,1,0},
+			{0,3,2,2,2,2,1,1,1,1},
+			{0,3,3,2,2,2,2,1,1,1}
+	};
+	
 	// Básicos
 	private String nombre;
 	private Raza raza;
@@ -67,8 +141,10 @@ public class Personaje {
 		setModInt(calcularModificador(inteligencia));
 		setModSab(calcularModificador(sabiduria));
 		setModCar(calcularModificador(carisma));
-		// Calculo de los conjuros diarios según clase y nivel
+		// Calculo de los conjuros diarios según clase y nivel.
 		setConjurosDiarios(calcularConjurosDiarios());
+		// Calculo y suma de os conjuros adicionales.
+		setConjurosDiarios(calcularConjurosAdicionales());
 	}
 
 	/**
@@ -137,139 +213,13 @@ public class Personaje {
 	 */
 	private int[] calcularConjurosDiarios() {
 
-		int[] conjurosDiarios = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		int[] conjurosDiarios = new int[10];
 		//Crear matriz final, y sacar filas en funcion del nivel
 		if (getClase() == Clase.MAGO) {
-			switch (getNivel()) {
-			case 1:
-				conjurosDiarios = new int[] { 3, 1, 0, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 2:
-				conjurosDiarios = new int[] { 4, 2, 0, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 3:
-				conjurosDiarios = new int[] { 4, 2, 1, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 4:
-				conjurosDiarios = new int[] { 4, 3, 1, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 5:
-				conjurosDiarios = new int[] { 4, 3, 2, 1, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 6:
-				conjurosDiarios = new int[] { 4, 3, 3, 2, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 7:
-				conjurosDiarios = new int[] { 4, 4, 3, 2, 1, 0, 0, 0, 0, 0 };
-				break;
-			case 8:
-				conjurosDiarios = new int[] { 4, 4, 3, 3, 2, 0, 0, 0, 0, 0 };
-				break;
-			case 9:
-				conjurosDiarios = new int[] { 4, 4, 4, 3, 2, 1, 0, 0, 0, 0 };
-				break;
-			case 10:
-				conjurosDiarios = new int[] { 4, 4, 4, 3, 3, 2, 0, 0, 0, 0 };
-				break;
-			case 11:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 3, 2, 1, 0, 0, 0 };
-				break;
-			case 12:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 3, 3, 2, 0, 0, 0 };
-				break;
-			case 13:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 3, 2, 1, 0, 0 };
-				break;
-			case 14:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 3, 3, 2, 0, 0 };
-				break;
-			case 15:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 4, 3, 2, 1, 0 };
-				break;
-			case 16:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 4, 3, 3, 2, 0 };
-				break;
-			case 17:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 4, 4, 3, 2, 1 };
-				break;
-			case 18:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 4, 4, 3, 3, 2 };
-				break;
-			case 19:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 3, 3 };
-				break;
-			case 20:
-				conjurosDiarios = new int[] { 4, 4, 4, 4, 4, 4, 4, 4, 4, 4 };
-				break;
-			default:
-				break;
-			}
+			conjurosDiarios=CONJUROS_DIARIOS_MAGO[getNivel()-1];
 		} else { // Puesto que sólo hay dos clases lanzadoras de magia implementadas, si no es Mago, entonces es
-					// Hechicero y se le aplican los conj. diarios de este.
-			switch (getNivel()) {
-			case 1:
-				conjurosDiarios = new int[] { 5, 3, 0, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 2:
-				conjurosDiarios = new int[] { 6, 4, 0, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 3:
-				conjurosDiarios = new int[] { 6, 5, 0, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 4:
-				conjurosDiarios = new int[] { 6, 6, 3, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 5:
-				conjurosDiarios = new int[] { 6, 6, 4, 0, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 6:
-				conjurosDiarios = new int[] { 6, 6, 5, 3, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 7:
-				conjurosDiarios = new int[] { 6, 6, 6, 4, 0, 0, 0, 0, 0, 0 };
-				break;
-			case 8:
-				conjurosDiarios = new int[] { 6, 6, 6, 5, 3, 0, 0, 0, 0, 0 };
-				break;
-			case 9:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 4, 0, 0, 0, 0, 0 };
-				break;
-			case 10:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 5, 3, 0, 0, 0, 0 };
-				break;
-			case 11:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 4, 0, 0, 0, 0 };
-				break;
-			case 12:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 5, 3, 0, 0, 0 };
-				break;
-			case 13:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 4, 0, 0, 0 };
-				break;
-			case 14:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 5, 3, 0, 0 };
-				break;
-			case 15:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 6, 4, 0, 0 };
-				break;
-			case 16:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 6, 5, 3, 0 };
-				break;
-			case 17:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 4, 0 };
-				break;
-			case 18:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 5, 3 };
-				break;
-			case 19:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 6, 4 };
-				break;
-			case 20:
-				conjurosDiarios = new int[] { 6, 6, 6, 6, 6, 6, 6, 6, 6, 6 };
-				break;
-			default:
-				break;
-			}
+				 // Hechicero y se le aplican los conj. diarios de este.
+			conjurosDiarios=CONJUROS_DIARIOS_HECHICERO[getNivel()-1];
 		}
 
 		return conjurosDiarios;
@@ -283,43 +233,15 @@ public class Personaje {
 	 */
 	private int[] calcularConjurosAdicionales() {
 
-		int modificador;
-		int[] auxiliar;
+		int[] auxiliar = getConjurosDiarios();
 		
-		if (getClase() == Clase.MAGO) { //Si es un mago, sus conj. adicionales depende del modificador de su Inteligencia
-			modificador=getModInt();
-		} else { //Sino, es hechicero, y sus conj. adicionales depende de su modificador de Sabiduria
-			modificador=getModSab();
+		if (getClase() == Clase.MAGO) { 
+			//Si es un mago, sus conj. adicionales depende del modificador de su Inteligencia
+			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModInt()-1]);
+		} else { 
+			//Sino, es hechicero, y sus conj. adicionales depende de su modificador de Sabiduria
+			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModSab()-1]);
 		}
-		
-		auxiliar = getConjurosDiarios();
-		
-		switch (modificador) { 
-			case 1:
-				return sumaVectores(auxiliar,new int[]{0,1,0,0,0,0,0,0,0,0});
-			case 2:
-				return sumaVectores(auxiliar,new int[]{0,1,1,0,0,0,0,0,0,0});
-			case 3:
-				return sumaVectores(auxiliar,new int[]{0,1,1,1,0,0,0,0,0,0});
-			case 4:
-				return sumaVectores(auxiliar,new int[]{0,1,1,1,1,0,0,0,0,0});
-			case 5:
-				return sumaVectores(auxiliar,new int[]{0,2,1,1,1,1,0,0,0,0});
-			case 6:
-				return sumaVectores(auxiliar,new int[]{0,2,2,1,1,1,1,0,0,0});
-			case 7:
-				return sumaVectores(auxiliar,new int[]{0,2,2,2,1,1,1,1,0,0});
-			case 8:
-				return sumaVectores(auxiliar,new int[]{0,2,2,2,2,1,1,1,1,0});
-			case 9:
-				return sumaVectores(auxiliar,new int[]{0,3,2,2,2,2,1,1,1,1});
-			case 10:
-				return sumaVectores(auxiliar,new int[]{0,3,3,2,2,2,2,1,1,1});
-			default:
-				break;
-		}
-		
-		return auxiliar;
 	}
 	
 	/**
