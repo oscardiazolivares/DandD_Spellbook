@@ -37,10 +37,18 @@ public class Hechizo {
 	/**
 	 * Distancia máxima a la que puede lanzarse un conjuro.
 	 */
-	private Alcance alcance;
+	protected Alcance alcance;
 	/**
 	 * Duración del conjuro
 	 */
+	private String duracion;
+	/**
+	 * Nivel de clase del personaje que lanza el conjuro
+	 */
+	protected int nivelDelLanzador;
+	
+	
+	
 	/**
 	 * @param nombre
 	 * @param escuela
@@ -55,7 +63,7 @@ public class Hechizo {
 	public Hechizo(String nombre, Escuela escuela, String subescuela,
 			Descriptor descriptor, short nivelMago, Componente[] componentes,
 			String descripcion, TiempoLanzamiento tiempoLanzamiento,
-			Alcance alcance) {
+			Alcance alcance, String duracion, int nivel) {
 		super();
 		this.nombre = nombre;
 		this.escuela = escuela;
@@ -66,6 +74,8 @@ public class Hechizo {
 		this.descripcion = descripcion;
 		this.tiempoLanzamiento = tiempoLanzamiento;
 		this.alcance = alcance;
+		this.duracion=duracion;
+		this.nivelDelLanzador=nivel;
 	}
 	
 	public Hechizo() {}
