@@ -6,7 +6,6 @@ public class Hechizo {
 	 * Nombre normal del hechizo
 	 */
 	private String nombre;
-	//Prueba
 	/**
 	 * Escuela a la que pertenece el hechizo
 	 */
@@ -18,11 +17,15 @@ public class Hechizo {
 	/**
 	 * Descriptor del hechizo, si lo tuviera. Puede ser de muchos tipos.
 	 */
-	private String descriptor; //fuego, sónico, enajenador...
+	private Descriptor descriptor;
 	/**
 	 * Nivel del hechizo para Magos y Hechiceros (de 0 a 9).
 	 */
 	private short nivelMago;
+	/**
+	 * Tipos de componentes del hechizo.
+	 */
+	private Componente[] componentes;
 	/**
 	 * Descripción completa del hechizo
 	 */
@@ -38,5 +41,34 @@ public class Hechizo {
 	/**
 	 * Duración del conjuro
 	 */
-	//private Duracion duracion;
+	/**
+	 * @param nombre
+	 * @param escuela
+	 * @param subescuela
+	 * @param descriptor
+	 * @param nivelMago
+	 * @param componentes
+	 * @param descripcion
+	 * @param tiempoLanzamiento
+	 * @param alcance
+	 */
+	public Hechizo(String nombre, Escuela escuela, String subescuela,
+			Descriptor descriptor, short nivelMago, Componente[] componentes,
+			String descripcion, TiempoLanzamiento tiempoLanzamiento,
+			Alcance alcance) {
+		super();
+		this.nombre = nombre;
+		this.escuela = escuela;
+		this.subescuela = subescuela;
+		this.descriptor = descriptor;
+		this.nivelMago = nivelMago;
+		this.componentes = componentes;
+		this.descripcion = descripcion;
+		this.tiempoLanzamiento = tiempoLanzamiento;
+		this.alcance = alcance;
+	}
+	
+	public Hechizo() {}
+	
+	
 }

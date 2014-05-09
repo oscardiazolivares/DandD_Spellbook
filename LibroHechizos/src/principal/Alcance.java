@@ -29,7 +29,11 @@ public class Alcance {
 	}
 	
 	public void alcanceConcreto(int alcance) {
-		setPies(alcance);
+		if (alcance<0) {
+			setPies(0);
+		} else {
+			setPies(alcance);
+		}
 	}
 	
 	/**
