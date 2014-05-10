@@ -51,6 +51,7 @@ public class LibroConjurosPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public LibroConjurosPrincipal() {
+		setResizable(false);
 		setTitle("RPG Clash Manager");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(2, 50, 1020, 700);
@@ -96,8 +97,8 @@ public class LibroConjurosPrincipal extends JFrame {
 		desktopPane.setBounds(12, 12, 994, 626);
 		contentPane.add(desktopPane);
 		
-		JButton btnInternal = new JButton("Internal");
-		btnInternal.addActionListener(new ActionListener() {
+		JButton btnBolaDeFuego = new JButton("Bola de fuego");
+		btnBolaDeFuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				DetalleHechizo internalFrame = new DetalleHechizo( new BolaDeFuego((short) 8));
 				internalFrame.setVisible(true);
@@ -108,7 +109,7 @@ public class LibroConjurosPrincipal extends JFrame {
 				}
 			}
 		});
-		btnInternal.setBounds(869, 598, 89, 23);
-		desktopPane.add(btnInternal);
+		btnBolaDeFuego.setBounds(869, 598, 89, 23);
+		desktopPane.add(btnBolaDeFuego);
 	}
 }

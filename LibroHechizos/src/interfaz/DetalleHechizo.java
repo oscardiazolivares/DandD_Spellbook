@@ -1,16 +1,24 @@
 package interfaz;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import principal.Hechizo;
+
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
+
 import java.awt.Color;
+
 import javax.swing.UIManager;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  * Ventana que muestra el detalle de un conjuro concreto preparado.
@@ -29,22 +37,22 @@ public class DetalleHechizo extends JInternalFrame {
 	 */
 	public DetalleHechizo(Hechizo hechizo) {
 		super("Conjuro: " + hechizo.getNombre(),
-		          true, //resizable
+		          false, //resizable
 		          true, //closable
-		          true, //maximizable
+		          false, //maximizable
 		          true);//iconifiable
-		    
 		    // Set the window's location.
 		    setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
 		
 		    this.hechizo=hechizo;
-		    
-		setBounds(100, 100, 445, 589);
+
+		    ++openFrameCount;
+		setBounds(100, 100, 445, 520);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, hechizo.getNombre() + " - NL " + hechizo.getNivelDelLanzador(), TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 12, 411, 532);
+		panel.setBounds(12, 12, 411, 422);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -142,8 +150,29 @@ public class DetalleHechizo extends JInternalFrame {
 		
 		JLabel lblDuracionMostrado = new JLabel(hechizo.getDuracion());
 		lblDuracionMostrado.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblDuracionMostrado.setBounds(290, 389, 121, 16);
+		lblDuracionMostrado.setBounds(278, 389, 121, 16);
 		panel.add(lblDuracionMostrado);
+		
+		JButton btnLanzar = new JButton("Lanzar");
+		btnLanzar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//Crear popUp con el resultado del hechizo
+				try {
+					UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+				} catch (Throwable e) {
+					e.printStackTrace();
+				}
+				try {
+					LanzamientoHechizo dialog = new LanzamientoHechizo(); //¿Que mensaje se le pasa? Tiene que valer para todos¿? ¿Donde se genera?
+					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					dialog.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnLanzar.setBounds(325, 449, 98, 26);
+		getContentPane().add(btnLanzar);
 		
 
 
