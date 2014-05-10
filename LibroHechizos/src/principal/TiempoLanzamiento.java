@@ -11,4 +11,13 @@ public enum TiempoLanzamiento {
 	TiempoLanzamiento (String nombre) {
 		this.nombre=nombre;
 	}
+
+	/**
+	 * @return Devuelve el valor del atributo nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+	
+	
 }

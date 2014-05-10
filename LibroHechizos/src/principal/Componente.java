@@ -23,4 +23,20 @@ public enum Componente {
 		this.nombreSimple = nombreSimple;
 	}
 
+	/**
+	 * @return Devuelve el valor del atributo abreviatura
+	 */
+	public String getAbreviatura() {
+		return abreviatura;
+	}
+
+	/**
+	 * @return Devuelve el valor del atributo nombreSimple
+	 */
+	public String getNombreSimple() {
+		return nombreSimple;
+	}
+	
+	
+
 }
