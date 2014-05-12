@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -17,6 +18,10 @@ import javax.swing.JSeparator;
 import javax.swing.UIManager;
 
 import principal.BolaDeFuego;
+import principal.Clase;
+import principal.Hechizo;
+import principal.Personaje;
+import principal.Raza;
 
 /**
  * Ventana principal de la interfaz gráfica
@@ -25,6 +30,10 @@ import principal.BolaDeFuego;
 public class LibroConjurosPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JDesktopPane desktopPane=new JDesktopPane();
+	//Personaje de prueba
+	ArrayList<Personaje> personajes = new ArrayList<Personaje>();
+	
 
 	/**
 	 * Launch the application.
@@ -52,9 +61,12 @@ public class LibroConjurosPrincipal extends JFrame {
 	 */
 	public LibroConjurosPrincipal() {
 		setResizable(false);
-		setTitle("RPG Clash Manager");
+		setTitle("D&D Spellbook");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(2, 50, 1020, 700);
+		
+		//Carga el nuevo personaje en el arraylist
+		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, new int[]{6, 1}));
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -80,6 +92,12 @@ public class LibroConjurosPrincipal extends JFrame {
 		JMenuItem mntmSalir = new JMenuItem("Salir");
 		mnFile.add(mntmSalir);
 		
+		JMenu mnVentana = new JMenu("Ventana");
+		menuBar.add(mnVentana);
+		
+		JMenuItem mntmPersonajes = new JMenuItem("Personajes");
+		mnVentana.add(mntmPersonajes);
+		
 		JMenu mnHelp = new JMenu("Ayuda");
 		menuBar.add(mnHelp);
 		
@@ -93,9 +111,15 @@ public class LibroConjurosPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		final JDesktopPane desktopPane = new JDesktopPane();
 		desktopPane.setBounds(12, 12, 994, 626);
 		contentPane.add(desktopPane);
+
+		//Conjuros preparados de prueba - 2 Bola de Fuego
+		ArrayList<Hechizo> conjurosPreparados= new ArrayList<Hechizo>();
+		conjurosPreparados.add(new BolaDeFuego((short) personajes.get(0).getNivel()));
+		conjurosPreparados.add(new BolaDeFuego((short) personajes.get(0).getNivel()));
+		//Asigno los conjuros al pj
+		personajes.get(0).setConjurosPreparados(conjurosPreparados);
 		
 		JButton btnBolaDeFuego = new JButton("Bola de fuego");
 		btnBolaDeFuego.addActionListener(new ActionListener() {
@@ -111,5 +135,18 @@ public class LibroConjurosPrincipal extends JFrame {
 		});
 		btnBolaDeFuego.setBounds(869, 598, 89, 23);
 		desktopPane.add(btnBolaDeFuego);
+		
+		// *** Abrir ventana "Personajes" ***
+		mntmPersonajes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListaPersonajes listaPj = new ListaPersonajes(personajes, desktopPane);
+				listaPj.setVisible(true);
+				desktopPane.add(listaPj);
+				try {
+					listaPj.setSelected(true);
+				} catch (java.beans.PropertyVetoException e) {
+				}
+			}
+		});
 	}
 }

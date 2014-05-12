@@ -1,5 +1,7 @@
 package principal;
 
+import java.util.ArrayList;
+
 /**
  * Clase que representa un personaje básico lanzador de conjuros e Dungeons & Dragons 3.5
  * 
@@ -112,8 +114,11 @@ public class Personaje {
 
 	// Conjuros diarios (número de conjuros que puede lanzar por día y nivel)
 	private int[] conjurosDiarios = new int[10]; // 10 porque los niveles de conjuro van desde el n0 al n9
+	
+	//Lista de conjuros preparados del personaje
+	private ArrayList<Hechizo> conjurosPreparados;
 
-	public Personaje(String nombre, Raza raza, Clase clase, int[] niveles, String alineamiento, int fuerza,
+	public Personaje(String nombre, Raza raza, Clase clase, int nivel, String alineamiento, int fuerza,
 			int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int ca, int pg,
 			int[] ataqueBase) {
 
@@ -145,6 +150,9 @@ public class Personaje {
 		setConjurosDiarios(calcularConjurosDiarios());
 		// Calculo y suma de os conjuros adicionales.
 		setConjurosDiarios(calcularConjurosAdicionales());
+		
+		//Los conjuros preparados estan vacios al crear el personaje, puesto que dependen del nivel del pj.
+		//setConjurosPreparados(conjurosPreparados);
 	}
 
 	/**
@@ -409,8 +417,16 @@ public class Personaje {
 	public int[] getConjurosDiarios() {
 		return conjurosDiarios;
 	}
+	
 
 	// Setters
+
+	/**
+	 * @return Devuelve el valor del atributo conjurosPreparados
+	 */
+	public ArrayList<Hechizo> getConjurosPreparados() {
+		return conjurosPreparados;
+	}
 
 	/**
 	 * @param nombre
@@ -579,4 +595,12 @@ public class Personaje {
 	private void setClase(Clase clase) {
 		this.clase = clase;
 	}
+
+	/**
+	 * @param conjurosPreparados the conjurosPreparados to set
+	 */
+	public void setConjurosPreparados(ArrayList<Hechizo> conjurosPreparados) {
+		this.conjurosPreparados = conjurosPreparados;
+	}
+	
 }
