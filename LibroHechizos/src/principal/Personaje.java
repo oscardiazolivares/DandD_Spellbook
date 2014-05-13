@@ -110,7 +110,7 @@ public class Personaje {
 	// Otros
 	private int ca; // Clase de Armadura
 	private int pg; // Puntos de golpe
-	private int[] ataqueBase;
+	private int ataqueBase;
 
 	// Conjuros diarios (número de conjuros que puede lanzar por día y nivel)
 	private int[] conjurosDiarios = new int[10]; // 10 porque los niveles de conjuro van desde el n0 al n9
@@ -120,7 +120,7 @@ public class Personaje {
 
 	public Personaje(String nombre, Raza raza, Clase clase, int nivel, String alineamiento, int fuerza,
 			int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int ca, int pg,
-			int[] ataqueBase) {
+			int ataqueBase) {
 
 		// Asignación de valores recibidos
 		setNombre(nombre);
@@ -162,7 +162,7 @@ public class Personaje {
 	 *            - base de la característica a la que queremos calcular el modificador
 	 * @return entero con el modificador de la característica recibida como parámetro
 	 */
-	private int calcularModificador(int base) {
+	public int calcularModificador(int base) {
 		switch (base) {
 		case 1:
 			return -5;
@@ -198,16 +198,16 @@ public class Personaje {
 			return 5;
 		case 22:
 		case 23:
-			return 5;
+			return 6;
 		case 24:
 		case 25:
-			return 6;
+			return 7;
 		case 26:
 		case 27:
-			return 7;
+			return 8;
 		case 28:
 		case 29:
-			return 8;
+			return 9;
 		default:
 			break;
 		}
@@ -407,7 +407,7 @@ public class Personaje {
 	/**
 	 * @return Devuelve el valor del atributo ataqueBase
 	 */
-	public int[] getAtaqueBase() {
+	public int getAtaqueBase() {
 		return ataqueBase;
 	}
 
@@ -576,7 +576,7 @@ public class Personaje {
 	 * @param ataqueBase
 	 *            the ataqueBase to set
 	 */
-	private void setAtaqueBase(int[] ataqueBase) {
+	private void setAtaqueBase(int ataqueBase) {
 		this.ataqueBase = ataqueBase;
 	}
 

@@ -44,11 +44,12 @@ public class ListaPersonajes extends JInternalFrame {
 		//Selección de un personaje
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				ListaHechizosPreparados listaHechizos = new ListaHechizosPreparados(list.getSelectedValue().getConjurosPreparados(), desktopPane);
-				listaHechizos.setVisible(true);
-				desktopPane.add(listaHechizos);
+				DetallePersonaje detallePj = new DetallePersonaje(list.getSelectedValue());
+//				ListaHechizosPreparados listaHechizos = new ListaHechizosPreparados(list.getSelectedValue().getConjurosPreparados(), desktopPane);
+				detallePj.setVisible(true);
+				desktopPane.add(detallePj);
 				try {
-					listaHechizos.setSelected(true);
+					detallePj.setSelected(true);
 				} catch (java.beans.PropertyVetoException e) {
 				}
 			}

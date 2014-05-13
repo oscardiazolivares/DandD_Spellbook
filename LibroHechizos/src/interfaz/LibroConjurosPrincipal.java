@@ -66,7 +66,7 @@ public class LibroConjurosPrincipal extends JFrame {
 		setBounds(2, 50, 1020, 700);
 		
 		//Carga el nuevo personaje en el arraylist
-		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, new int[]{6, 1}));
+		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

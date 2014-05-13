@@ -190,6 +190,16 @@ public class Hechizo {
 	public String getTs() {
 		return ts;
 	}
+
+
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return nombre + " [" + nivelHechizo + "]";
+	}
 	
 	
 	
