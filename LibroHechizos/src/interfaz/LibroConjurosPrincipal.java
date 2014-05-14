@@ -31,7 +31,7 @@ public class LibroConjurosPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JDesktopPane desktopPane=new JDesktopPane();
-	//Personaje de prueba
+	//Arraylist de todos los personajes guardados (to-do: cargar desde archivo guardado)
 	ArrayList<Personaje> personajes = new ArrayList<Personaje>();
 	
 
@@ -63,7 +63,7 @@ public class LibroConjurosPrincipal extends JFrame {
 		setResizable(false);
 		setTitle("D&D Spellbook");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(2, 50, 1020, 700);
+		setBounds(2, 50, 1000, 700);
 		
 		//Carga el nuevo personaje en el arraylist
 		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
@@ -111,7 +111,7 @@ public class LibroConjurosPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		desktopPane.setBounds(12, 12, 994, 626);
+		desktopPane.setBounds(0, 0, 994, 640);
 		contentPane.add(desktopPane);
 
 		//Conjuros preparados de prueba - 2 Bola de Fuego

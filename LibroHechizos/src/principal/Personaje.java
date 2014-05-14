@@ -418,7 +418,20 @@ public class Personaje {
 		return conjurosDiarios;
 	}
 	
-
+	/**
+	 * @return Devuelve el valor del atributo conjurosDiarios
+	 */
+	public String getConjurosDiariosCadena() {
+		StringBuffer salida = new StringBuffer("");
+		for (int i = 0; i < conjurosDiarios.length; i++) {
+			salida.append(conjurosDiarios[i]);
+			if(i!=(conjurosDiarios.length-1)) {//Si no es el ultimo
+				salida.append(", ");
+			}
+		}
+		return salida.toString();
+	}
+	
 	// Setters
 
 	/**

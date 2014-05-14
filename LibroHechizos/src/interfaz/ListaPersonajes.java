@@ -13,6 +13,9 @@ import principal.Personaje;
 
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ListaPersonajes extends JInternalFrame {
 
@@ -26,7 +29,7 @@ public class ListaPersonajes extends JInternalFrame {
 	public ListaPersonajes(ArrayList<Personaje> personajes, final JDesktopPane desktopPane) {
 		setClosable(true);
 		setTitle("Lista de personajes");
-		setBounds(100, 100, 255, 300);
+		setBounds(100, 100, 255, 331);
 		getContentPane().setLayout(null);
 		
 		list.setBounds(12, 12, 223, 243);
@@ -41,20 +44,23 @@ public class ListaPersonajes extends JInternalFrame {
 		
 		list.setModel(modelPersonajes);
 		
-		//Selección de un personaje
-		list.addListSelectionListener(new ListSelectionListener() {
-			public void valueChanged(ListSelectionEvent arg0) {
+		JButton btnMostrar = new JButton("Mostrar");
+		btnMostrar.setBounds(135, 267, 98, 26);
+		getContentPane().add(btnMostrar);
+		
+		//Mostrar pj
+		btnMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				DetallePersonaje detallePj = new DetallePersonaje(list.getSelectedValue());
 //				ListaHechizosPreparados listaHechizos = new ListaHechizosPreparados(list.getSelectedValue().getConjurosPreparados(), desktopPane);
 				detallePj.setVisible(true);
 				desktopPane.add(detallePj);
 				try {
 					detallePj.setSelected(true);
-				} catch (java.beans.PropertyVetoException e) {
+				} catch (java.beans.PropertyVetoException e1) {
 				}
 			}
 		});
 
 	}
-
 }

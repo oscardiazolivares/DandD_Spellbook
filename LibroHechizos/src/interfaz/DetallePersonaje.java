@@ -37,26 +37,26 @@ public class DetallePersonaje extends JInternalFrame {
 		setTitle(pj.getNombre() + ": " + pj.getClase().getNombre() + " de nivel " + pj.getNivel());
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 432, 692);
+		setBounds(100, 100, 432, 641);
 		getContentPane().setLayout(null);
 		
 		//Panels
 		
 		JPanel panel_Caracteristicas = new JPanel();
 		panel_Caracteristicas.setBorder(new TitledBorder(null, "Caracter\u00EDsticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_Caracteristicas.setBounds(12, 136, 398, 112);
+		panel_Caracteristicas.setBounds(12, 136, 404, 112);
 		getContentPane().add(panel_Caracteristicas);
 		panel_Caracteristicas.setLayout(null);
 		
 		JPanel panel_infoBasica = new JPanel();
 		panel_infoBasica.setBorder(new TitledBorder(null, "Informaci\u00F3n b\u00E1sica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_infoBasica.setBounds(12, 12, 398, 112);
+		panel_infoBasica.setBounds(12, 12, 404, 112);
 		getContentPane().add(panel_infoBasica);
 		panel_infoBasica.setLayout(null);
 		
 		JPanel panel_Conjuros = new JPanel();
 		panel_Conjuros.setBorder(new TitledBorder(null, "Conjuros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_Conjuros.setBounds(12, 260, 398, 363);
+		panel_Conjuros.setBounds(12, 260, 404, 315);
 		getContentPane().add(panel_Conjuros);
 		panel_Conjuros.setLayout(null);
 		
@@ -82,15 +82,15 @@ public class DetallePersonaje extends JInternalFrame {
 		SpinnerModel spinnerModelAtaque = new SpinnerNumberModel(pj.getAtaqueBase(), 1, 20, 1);
 
 		//Spinners
-		JSpinner spFue = new JSpinner(spinnerModelFue);
+		final JSpinner spFue = new JSpinner(spinnerModelFue);
 		spFue.setBounds(40, 42, 35, 20);
 		panel_Caracteristicas.add(spFue);
 		
-		JSpinner spDes = new JSpinner(spinnerModelDes);
+		final JSpinner spDes = new JSpinner(spinnerModelDes);
 		spDes.setBounds(40, 70, 35, 20);
 		panel_Caracteristicas.add(spDes);
 		
-		JSpinner spCon = new JSpinner(spinnerModelCon);
+		final JSpinner spCon = new JSpinner(spinnerModelCon);
 		spCon.setBounds(168, 42, 35, 20);
 		panel_Caracteristicas.add(spCon);
 		
@@ -98,33 +98,13 @@ public class DetallePersonaje extends JInternalFrame {
 		spInt.setBounds(168, 70, 35, 20);
 		panel_Caracteristicas.add(spInt);
 		
-		JSpinner spSab = new JSpinner(spinnerModelSab);
+		final JSpinner spSab = new JSpinner(spinnerModelSab);
 		spSab.setBounds(304, 42, 35, 20);
 		panel_Caracteristicas.add(spSab);
 		
-		JSpinner spCar = new JSpinner(spinnerModelCar);
+		final JSpinner spCar = new JSpinner(spinnerModelCar);
 		spCar.setBounds(304, 70, 35, 20);
 		panel_Caracteristicas.add(spCar);
-		
-		JSpinner spDesMod = new JSpinner(spinnerModelDesMod);
-		spDesMod.setBounds(87, 70, 35, 20);
-		panel_Caracteristicas.add(spDesMod);
-		
-		JSpinner spFueMod = new JSpinner(spinnerModelFueMod);
-		spFueMod.setBounds(87, 42, 35, 20);
-		panel_Caracteristicas.add(spFueMod);
-		
-		JSpinner spCarMod = new JSpinner(spinnerModelCarMod);
-		spCarMod.setBounds(351, 70, 35, 20);
-		panel_Caracteristicas.add(spCarMod);
-		
-		JSpinner spSabMod = new JSpinner(spinnerModelSabMod);
-		spSabMod.setBounds(351, 42, 35, 20);
-		panel_Caracteristicas.add(spSabMod);
-		
-		JSpinner spConMod = new JSpinner(spinnerModelConMod);
-		spConMod.setBounds(215, 42, 35, 20);
-		panel_Caracteristicas.add(spConMod);
 		
 		JSpinner spNivel = new JSpinner(spinnerModelNivel);
 		spNivel.setBounds(274, 55, 42, 20);
@@ -144,12 +124,36 @@ public class DetallePersonaje extends JInternalFrame {
 		
 		//Labels de modificadores
 		
-		final JLabel lblModInt = new JLabel("");
+		final JLabel lblModInt = new JLabel(String.valueOf(pj.getModInt()));
 		lblModInt.setHorizontalAlignment(SwingConstants.LEFT);
 		lblModInt.setBounds(215, 72, 35, 16);
 		panel_Caracteristicas.add(lblModInt);
 		
+		final JLabel lblModCon = new JLabel(String.valueOf(pj.getModCon()));
+		lblModCon.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModCon.setBounds(215, 45, 35, 16);
+		panel_Caracteristicas.add(lblModCon);
 		
+		final JLabel lblModSab = new JLabel(String.valueOf(pj.getModSab()));
+		lblModSab.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModSab.setBounds(351, 45, 35, 16);
+		panel_Caracteristicas.add(lblModSab);
+		
+		final JLabel lblModCar = new JLabel(String.valueOf(pj.getModCar()));
+		lblModCar.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModCar.setBounds(351, 73, 35, 16);
+		panel_Caracteristicas.add(lblModCar);
+		
+		final JLabel lblModFue = new JLabel(String.valueOf(pj.getModFue()));
+		lblModFue.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModFue.setBounds(90, 45, 35, 16);
+		panel_Caracteristicas.add(lblModFue);
+		
+		final JLabel lblModDes = new JLabel(String.valueOf(pj.getModDes()));
+		lblModDes.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModDes.setBounds(90, 72, 35, 16);
+		panel_Caracteristicas.add(lblModDes);
+				
 		//Comboboxes
 		
 		JComboBox comboBox_clase = new JComboBox(Clase.values());
@@ -162,17 +166,17 @@ public class DetallePersonaje extends JInternalFrame {
 		
 		//Textfields
 		
-		textField_nombre = new JTextField();
+		textField_nombre = new JTextField(pj.getNombre());
 		textField_nombre.setBounds(70, 27, 153, 20);
 		panel_infoBasica.add(textField_nombre);
 		textField_nombre.setColumns(10);
 		
-		textField_alineamiento = new JTextField();
+		textField_alineamiento = new JTextField(pj.getAlineamiento());
 		textField_alineamiento.setBounds(96, 83, 127, 20);
 		panel_infoBasica.add(textField_alineamiento);
 		textField_alineamiento.setColumns(10);
 		
-		textField_ConjurosDiarios = new JTextField();
+		textField_ConjurosDiarios = new JTextField(pj.getConjurosDiariosCadena());
 		textField_ConjurosDiarios.setBounds(163, 24, 223, 20);
 		panel_Conjuros.add(textField_ConjurosDiarios);
 		textField_ConjurosDiarios.setColumns(10);
@@ -180,17 +184,17 @@ public class DetallePersonaje extends JInternalFrame {
 		//Lists
 		
 		JList listConocidos = new JList();
-		listConocidos.setBounds(12, 75, 153, 247);
+		listConocidos.setBounds(12, 75, 153, 200);
 		panel_Conjuros.add(listConocidos);
 		
 		JList listPreparados = new JList();
-		listPreparados.setBounds(236, 75, 153, 247);
+		listPreparados.setBounds(236, 75, 153, 200);
 		panel_Conjuros.add(listPreparados);
 		
 		//Buttons
 		
 		JButton btnBorrar = new JButton("Borrar todos");
-		btnBorrar.setBounds(236, 334, 150, 20);
+		btnBorrar.setBounds(236, 286, 150, 20);
 		panel_Conjuros.add(btnBorrar);
 		
 		JButton btnNewButton = new JButton(">");
@@ -204,17 +208,16 @@ public class DetallePersonaje extends JInternalFrame {
 		panel_Conjuros.add(button);
 		
 		JButton btnGuardarPj = new JButton("Guardar PJ");
-		btnGuardarPj.setBounds(284, 627, 126, 26);
+		btnGuardarPj.setBounds(288, 581, 126, 26);
 		getContentPane().add(btnGuardarPj);
 		
 		JButton btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(147, 627, 126, 26);
+		btnModificar.setBounds(150, 581, 126, 26);
 		getContentPane().add(btnModificar);
 		
 		JButton btnNuevoPersonaje = new JButton("Nuevo PJ");
-		btnNuevoPersonaje.setBounds(10, 627, 126, 26);
+		btnNuevoPersonaje.setBounds(12, 581, 126, 26);
 		getContentPane().add(btnNuevoPersonaje);
-
 		
 		//Labels
 		JLabel lblFue = new JLabel("FUE");
@@ -270,7 +273,6 @@ public class DetallePersonaje extends JInternalFrame {
 		JLabel label_1 = new JLabel("Mod.");
 		label_1.setBounds(218, 23, 35, 16);
 		panel_Caracteristicas.add(label_1);
-		
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(12, 29, 55, 16);
 		panel_infoBasica.add(lblNombre);
@@ -323,7 +325,35 @@ public class DetallePersonaje extends JInternalFrame {
 				lblModInt.setText(String.valueOf(pj.calcularModificador((int)spInt.getValue())));
 			}
 		});
+		
+		spSab.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModSab.setText(String.valueOf(pj.calcularModificador((int)spSab.getValue())));
+			}
+		});
+		
+		spCar.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModCar.setText(String.valueOf(pj.calcularModificador((int)spCar.getValue())));
+			}
+		});
+		
+		spFue.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModFue.setText(String.valueOf(pj.calcularModificador((int)spFue.getValue())));
+			}
+		});
+		
+		spDes.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModDes.setText(String.valueOf(pj.calcularModificador((int)spDes.getValue())));
+			}
+		});
+		
+		spCon.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModCon.setText(String.valueOf(pj.calcularModificador((int)spCon.getValue())));
+			}
+		});
 	}
-	
-	// TO-DO => CREAR OTRO CONSTRUCTOR QUE NO RECIBA PERSONAJE POR PARÁMETRO PARA CREAR UN NUEVO PERSONAJE
 }
