@@ -31,8 +31,11 @@ public class LibroConjurosPrincipal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JDesktopPane desktopPane=new JDesktopPane();
+	
 	//Arraylist de todos los personajes guardados (to-do: cargar desde archivo guardado)
 	ArrayList<Personaje> personajes = new ArrayList<Personaje>();
+	//ArrayList de todos los conjuros disponibles
+	public static final ArrayList<Hechizo> HECHIZOS = new ArrayList<Hechizo>();
 	
 
 	/**
@@ -67,6 +70,9 @@ public class LibroConjurosPrincipal extends JFrame {
 		
 		//Carga el nuevo personaje en el arraylist
 		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
+		
+		//Carga todos los hechizos en su correspondiente arraylist
+		HECHIZOS.add(new BolaDeFuego((short)0));
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

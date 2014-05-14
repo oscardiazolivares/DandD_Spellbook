@@ -616,4 +616,13 @@ public class Personaje {
 		this.conjurosPreparados = conjurosPreparados;
 	}
 	
+	/**
+	 * Cambia el valor de uno de los niveles de conjuros diarios. Por ejemplo, si el mago tiene 3 conjuros de nivel 2 al día, este método puede asignarle 4 conjuros de nivel 2.
+	 */
+	public void setConjuroDiarioNivel(int nuevoValor, int nivelACambiar) {
+		if (nivelACambiar>-1 && nivelACambiar<10) {
+			this.conjurosDiarios[nivelACambiar]=nuevoValor;
+		}
+	}
+	
 }
