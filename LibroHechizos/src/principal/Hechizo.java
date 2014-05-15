@@ -21,7 +21,7 @@ public class Hechizo {
 	/**
 	 * Nivel del hechizo para Magos y Hechiceros (de 0 a 9).
 	 */
-	private short nivelHechizo;
+	private int nivelHechizo;
 	/**
 	 * Tipos de componentes del hechizo.
 	 */
@@ -64,7 +64,7 @@ public class Hechizo {
 	 * @param alcance
 	 */
 	public Hechizo(String nombre, Escuela escuela, String subescuela,
-			Descriptor descriptor, short nivelMago, Componente[] componentes,
+			Descriptor descriptor, int nivelConjuro, Componente[] componentes,
 			String descripcion, TiempoLanzamiento tiempoLanzamiento,
 			Alcance alcance, String duracion, String ts, int nivel) {
 		super();
@@ -72,7 +72,7 @@ public class Hechizo {
 		this.escuela = escuela;
 		this.subescuela = subescuela;
 		this.descriptor = descriptor;
-		this.nivelHechizo = nivelMago;
+		this.nivelHechizo = nivelConjuro;
 		this.componentes = componentes;
 		this.descripcion = descripcion;
 		this.tiempoLanzamiento = tiempoLanzamiento;
@@ -113,7 +113,7 @@ public class Hechizo {
 	/**
 	 * @return Devuelve el valor del atributo nivelMago
 	 */
-	public short getNivelHechizo() {
+	public int getNivelHechizo() {
 		return nivelHechizo;
 	}
 

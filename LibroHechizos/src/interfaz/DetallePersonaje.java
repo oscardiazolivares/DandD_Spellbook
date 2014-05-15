@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JList;
 import javax.swing.JButton;
 
+import principal.BolaDeFuego;
 import principal.Clase;
 import principal.Hechizo;
 import principal.Personaje;
@@ -25,6 +26,7 @@ import java.awt.Font;
 
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -88,7 +90,6 @@ public class DetallePersonaje extends JInternalFrame {
 	private JButton btnEliminarConj;
 	private JButton btnGuardarPj;
 	private JButton btnModificar;
-	private JButton btnNuevoPersonaje;
 	private JLabel lblFue;
 	private JLabel lblDes;
 	private JLabel lblCaract;
@@ -122,6 +123,7 @@ public class DetallePersonaje extends JInternalFrame {
 	private JLabel label_9;
 	private JLabel label_10;
 	private JLabel label_20;
+	private JButton btnVerConj;
 
 	/**
 	 * Create the frame.
@@ -131,26 +133,26 @@ public class DetallePersonaje extends JInternalFrame {
 		setTitle(pj.getNombre() + ": " + pj.getClase().getNombre() + " de nivel " + pj.getNivel());
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 432, 641);
+		setBounds(100, 100, 853, 419);
 		getContentPane().setLayout(null);
 		
 		//Panels
 		
 		panel_Caracteristicas = new JPanel();
 		panel_Caracteristicas.setBorder(new TitledBorder(null, "Caracter\u00EDsticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_Caracteristicas.setBounds(12, 136, 404, 112);
+		panel_Caracteristicas.setBounds(12, 147, 404, 123);
 		getContentPane().add(panel_Caracteristicas);
 		panel_Caracteristicas.setLayout(null);
 		
 		panel_infoBasica = new JPanel();
 		panel_infoBasica.setBorder(new TitledBorder(null, "Informaci\u00F3n b\u00E1sica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_infoBasica.setBounds(12, 12, 404, 112);
+		panel_infoBasica.setBounds(12, 12, 404, 123);
 		getContentPane().add(panel_infoBasica);
 		panel_infoBasica.setLayout(null);
 		
 		panel_Conjuros = new JPanel();
 		panel_Conjuros.setBorder(new TitledBorder(null, "Conjuros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_Conjuros.setBounds(12, 260, 404, 315);
+		panel_Conjuros.setBounds(428, 12, 404, 362);
 		getContentPane().add(panel_Conjuros);
 		panel_Conjuros.setLayout(null);
 		
@@ -286,25 +288,23 @@ public class DetallePersonaje extends JInternalFrame {
 		//LIstmodels
 		
 		conjConocidos = new DefaultListModel<Hechizo>();
-		for (Hechizo hechizo : Principal.HECHIZOS) {
-			conjConocidos.addElement(hechizo);
-		}
+		generarConjConocidos(pj.getNivel());
 		conjPreparados = new DefaultListModel<Hechizo>();
 		
 		//Lists
 		
 		listConocidos = new JList<Hechizo>(conjConocidos);
-		listConocidos.setBounds(12, 75, 153, 200);
+		listConocidos.setBounds(12, 75, 153, 221);
 		panel_Conjuros.add(listConocidos);
 		
 		listPreparados = new JList<Hechizo>();
-		listPreparados.setBounds(236, 75, 153, 200);
+		listPreparados.setBounds(236, 75, 153, 221);
 		panel_Conjuros.add(listPreparados);
 		
 		//Buttons
 		
 		btnRestaurar = new JButton("Restaurar diarios");
-		btnRestaurar.setBounds(236, 286, 150, 20);
+		btnRestaurar.setBounds(239, 330, 150, 20);
 		panel_Conjuros.add(btnRestaurar);
 		
 		btnAgregarConj = new JButton(">");
@@ -321,16 +321,16 @@ public class DetallePersonaje extends JInternalFrame {
 		
 		btnGuardarPj = new JButton("Guardar PJ");
 		btnGuardarPj.setEnabled(false);
-		btnGuardarPj.setBounds(288, 581, 126, 26);
+		btnGuardarPj.setBounds(290, 348, 126, 26);
 		getContentPane().add(btnGuardarPj);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(150, 581, 126, 26);
+		btnModificar.setBounds(152, 348, 126, 26);
 		getContentPane().add(btnModificar);
 		
-		btnNuevoPersonaje = new JButton("Nuevo PJ");
-		btnNuevoPersonaje.setBounds(12, 581, 126, 26);
-		getContentPane().add(btnNuevoPersonaje);
+		btnVerConj = new JButton("Lanzar conjuro");
+		btnVerConj.setBounds(239, 308, 150, 20);
+		panel_Conjuros.add(btnVerConj);
 		
 		lblFue = new JLabel("FUE");
 		lblFue.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -562,6 +562,7 @@ public class DetallePersonaje extends JInternalFrame {
 						//Reduce en 1 el nivel de conj. diario del conjuro a preparar 
 						// => Esto OBLIGA a crear un boton "Restaurar conj. diarios" que los devuelva a la normalidad y borre los conjuros.
 						pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]-1, listConocidos.getSelectedValue().getNivelHechizo());
+						
 						//Añade el conjuro a la lista de preparados
 						conjPreparados.addElement(listConocidos.getSelectedValue());
 						listPreparados.setModel(conjPreparados);
@@ -627,6 +628,23 @@ public class DetallePersonaje extends JInternalFrame {
 			}
 		});
 		
+		//Ver el hechizo selecionado
+		
+		btnVerConj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (listPreparados.getSelectedValue()!=null) {
+					DetalleHechizo internalFrame = new DetalleHechizo(listPreparados.getSelectedValue());
+					internalFrame.setVisible(true);
+					Principal.desktopPane.add(internalFrame);
+					try {
+						internalFrame.setSelected(true);
+					} catch (java.beans.PropertyVetoException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
 	}
 
 	private void actualizarLabelConjDiario() {
@@ -640,5 +658,9 @@ public class DetallePersonaje extends JInternalFrame {
 		lblDiarios7.setText(String.valueOf(pj.getConjurosDiarios()[7]));
 		lblDiarios8.setText(String.valueOf(pj.getConjurosDiarios()[8]));
 		lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
+	}
+	
+	private void generarConjConocidos(int nivelLanzador) {
+		conjConocidos.addElement(new BolaDeFuego(nivelLanzador));
 	}
 }

@@ -2,7 +2,7 @@ package principal;
 
 public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable{
 
-	public BolaDeFuego(short nivelLanzador) {
+	public BolaDeFuego(int nivelLanzador) {
 		super(
 				"Bola de Fuego",
 				Escuela.EVOCACION,
