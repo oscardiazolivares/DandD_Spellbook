@@ -45,6 +45,11 @@ public class Tirada {
 		return resultado;
 	}
 	
+	/**
+	 * Realiza n tiradas de un dado concreto
+	 * @param dado
+	 * @return
+	 */
 	private int tirarDados(int dado[]) {
 		
 		int resultado=0;

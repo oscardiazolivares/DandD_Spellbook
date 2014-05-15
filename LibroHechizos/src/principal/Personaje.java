@@ -147,9 +147,7 @@ public class Personaje {
 		setModSab(calcularModificador(sabiduria));
 		setModCar(calcularModificador(carisma));
 		// Calculo de los conjuros diarios según clase y nivel.
-		setConjurosDiarios(calcularConjurosDiarios());
-		// Calculo y suma de os conjuros adicionales.
-		setConjurosDiarios(calcularConjurosAdicionales());
+		setConjurosDiarios();
 		
 		//Los conjuros preparados estan vacios al crear el personaje, puesto que dependen del nivel del pj.
 		//setConjurosPreparados(conjurosPreparados);
@@ -241,7 +239,7 @@ public class Personaje {
 	 */
 	private int[] calcularConjurosAdicionales() {
 
-		int[] auxiliar = getConjurosDiarios();
+		int[] auxiliar = calcularConjurosDiarios();
 		
 		if (getClase() == Clase.MAGO) { 
 			//Si es un mago, sus conj. adicionales depende del modificador de su Inteligencia
@@ -594,11 +592,11 @@ public class Personaje {
 	}
 
 	/**
-	 * @param conjurosDiarios
-	 *            the conjurosDiarios to set
+	 * Calcula y define los conjuros diarios de un personaje.
 	 */
-	private void setConjurosDiarios(int[] conjurosDiarios) {
-		this.conjurosDiarios = conjurosDiarios;
+	public void setConjurosDiarios() {
+		
+		this.conjurosDiarios = calcularConjurosAdicionales();
 	}
 
 	/**
