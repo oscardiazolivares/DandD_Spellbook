@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import principal.Hechizo;
+import principal.Mostrable;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
@@ -35,19 +36,18 @@ public class DetalleHechizo extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DetalleHechizo(Hechizo hechizo) {
+	public DetalleHechizo(final Hechizo hechizo) {
 		super("Conjuro: " + hechizo.getNombre(),
 		          false, //resizable
 		          true, //closable
 		          false, //maximizable
 		          true);//iconifiable
 		    // Set the window's location.
-		    setLocation(xOffset*openFrameCount, yOffset*openFrameCount);
 		
 		    this.hechizo=hechizo;
 
 		    ++openFrameCount;
-		setBounds(100, 100, 445, 520);
+		setBounds(xOffset*openFrameCount, yOffset*openFrameCount, 445, 520);
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -163,7 +163,7 @@ public class DetalleHechizo extends JInternalFrame {
 					e.printStackTrace();
 				}
 				try {
-					LanzamientoHechizo dialog = new LanzamientoHechizo(); //¿Que mensaje se le pasa? Tiene que valer para todos¿? ¿Donde se genera?
+					LanzamientoHechizo dialog = new LanzamientoHechizo(((Mostrable)hechizo).mostrarResolucion()); //¿Que mensaje se le pasa? Tiene que valer para todos¿? ¿Donde se genera?
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {

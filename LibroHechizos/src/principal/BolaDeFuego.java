@@ -1,6 +1,6 @@
 package principal;
 
-public class BolaDeFuego extends Hechizo implements Hiriente {
+public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable{
 
 	public BolaDeFuego(short nivelLanzador) {
 		super(
@@ -31,7 +31,7 @@ public class BolaDeFuego extends Hechizo implements Hiriente {
 	}
 
 	@Override
-	public String mostrarPuntosGolpe() {
+	public String mostrarResolucion() {
 		String resultado = "La Bola de fuego explota provocando " + calcularPuntosGolpe()
 				+ "PG a todas las criaturas situadas en un radio de 20' de la explosión.";
 		return resultado;

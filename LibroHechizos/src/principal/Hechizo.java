@@ -51,8 +51,7 @@ public class Hechizo {
 	 */
 	protected int nivelDelLanzador;
 	
-	
-	
+
 	/**
 	 * @param nombre
 	 * @param escuela
@@ -83,16 +82,12 @@ public class Hechizo {
 		this.nivelDelLanzador=nivel;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo nombre
 	 */
 	public String getNombre() {
 		return nombre;
 	}
-
-
 
 	/**
 	 * @return Devuelve el valor del atributo escuela
@@ -101,16 +96,12 @@ public class Hechizo {
 		return escuela;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo subescuela
 	 */
 	public String getSubescuela() {
 		return subescuela;
 	}
-
-
 
 	/**
 	 * @return Devuelve el valor del atributo descriptor
@@ -119,16 +110,12 @@ public class Hechizo {
 		return descriptor;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo nivelMago
 	 */
 	public short getNivelHechizo() {
 		return nivelHechizo;
 	}
-
-
 
 	/**
 	 * @return Devuelve el valor del atributo componentes
@@ -137,16 +124,12 @@ public class Hechizo {
 		return componentes;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo descripcion
 	 */
 	public String getDescripcion() {
 		return descripcion;
 	}
-
-
 
 	/**
 	 * @return Devuelve el valor del atributo tiempoLanzamiento
@@ -155,16 +138,12 @@ public class Hechizo {
 		return tiempoLanzamiento;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo alcance
 	 */
 	public Alcance getAlcance() {
 		return alcance;
 	}
-
-
 
 	/**
 	 * @return Devuelve el valor del atributo duracion
@@ -173,8 +152,6 @@ public class Hechizo {
 		return duracion;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo nivelDelLanzador
 	 */
@@ -182,16 +159,12 @@ public class Hechizo {
 		return nivelDelLanzador;
 	}
 
-
-
 	/**
 	 * @return Devuelve el valor del atributo ts
 	 */
 	public String getTs() {
 		return ts;
 	}
-
-
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

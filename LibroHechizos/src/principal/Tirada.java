@@ -26,7 +26,7 @@ public class Tirada {
 	 */
 	public int resolverTirada() {
 		int resultado = 0;
-		if (dados[0].length == 2) { // Si la dimensión de las filas es diferente de 2, no es una matriz válida.
+		if (dados.length == 2) { // Si la dimensión de las filas es diferente de 2, no es una matriz válida.
 			int aux=0;
 			for (int i = 0; i < dados.length; i++) { // ejemplo -> dados.length=3
 				for (int j = 0; j <dados[0][i]; j++) { // ejemplo -> dados[0][i]= 2, 2 y 1

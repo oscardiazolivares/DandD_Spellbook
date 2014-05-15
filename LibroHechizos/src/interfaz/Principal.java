@@ -10,7 +10,9 @@ import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -23,11 +25,14 @@ import principal.Hechizo;
 import principal.Personaje;
 import principal.Raza;
 
+import javax.swing.border.TitledBorder;
+import javax.swing.JList;
+
 /**
  * Ventana principal de la interfaz gráfica
  * @author Óscar Díaz Olivares
  */
-public class LibroConjurosPrincipal extends JFrame {
+public class Principal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JDesktopPane desktopPane=new JDesktopPane();
@@ -36,6 +41,9 @@ public class LibroConjurosPrincipal extends JFrame {
 	ArrayList<Personaje> personajes = new ArrayList<Personaje>();
 	//ArrayList de todos los conjuros disponibles
 	public static final ArrayList<Hechizo> HECHIZOS = new ArrayList<Hechizo>();
+	
+	private JList<Personaje> listPersonajes;
+	private DefaultListModel<Personaje> modelPersonajes = new DefaultListModel<Personaje>();
 	
 
 	/**
@@ -50,7 +58,7 @@ public class LibroConjurosPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LibroConjurosPrincipal frame = new LibroConjurosPrincipal();
+					Principal frame = new Principal();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -62,7 +70,7 @@ public class LibroConjurosPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public LibroConjurosPrincipal() {
+	public Principal() {
 		setResizable(false);
 		setTitle("D&D Spellbook");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -117,8 +125,40 @@ public class LibroConjurosPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		desktopPane.setBounds(0, 0, 994, 640);
+		desktopPane.setBounds(0, 12, 994, 640);
 		contentPane.add(desktopPane);
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Personajes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(12, 12, 237, 582);
+		desktopPane.add(panel);
+		panel.setLayout(null);
+		
+		listPersonajes = new JList<Personaje>();
+		listPersonajes.setBounds(12, 22, 213, 468);
+		panel.add(listPersonajes);
+		
+		//Carga listModel
+		Personaje personajeAux;
+		for (Iterator<Personaje> iterator = personajes.iterator(); iterator.hasNext();) {
+			personajeAux = (Personaje) iterator.next();
+			modelPersonajes.addElement(personajeAux);
+		}
+				
+				listPersonajes.setModel(modelPersonajes);
+		
+		JButton btnAadir = new JButton("Nuevo");
+		btnAadir.setBounds(12, 502, 98, 26);
+		panel.add(btnAadir);
+		
+		JButton btnMostrar = new JButton("Mostrar");
+		btnMostrar.setBounds(127, 502, 98, 26);
+		panel.add(btnMostrar);
+		
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(127, 544, 98, 26);
+		panel.add(btnEliminar);
+		
 
 		//Conjuros preparados de prueba - 2 Bola de Fuego
 		ArrayList<Hechizo> conjurosPreparados= new ArrayList<Hechizo>();
@@ -143,14 +183,28 @@ public class LibroConjurosPrincipal extends JFrame {
 		desktopPane.add(btnBolaDeFuego);
 		
 		// *** Abrir ventana "Personajes" ***
-		mntmPersonajes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ListaPersonajes listaPj = new ListaPersonajes(personajes, desktopPane);
-				listaPj.setVisible(true);
-				desktopPane.add(listaPj);
+//		mntmPersonajes.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent arg0) {
+//				ListaPersonajes listaPj = new ListaPersonajes(personajes, desktopPane);
+//				listaPj.setVisible(true);
+//				desktopPane.add(listaPj);
+//				try {
+//					listaPj.setSelected(true);
+//				} catch (java.beans.PropertyVetoException e) {
+//				}
+//			}
+//		});
+		
+		//Mostrar pj
+		btnMostrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DetallePersonaje detallePj = new DetallePersonaje(listPersonajes.getSelectedValue());
+//						ListaHechizosPreparados listaHechizos = new ListaHechizosPreparados(list.getSelectedValue().getConjurosPreparados(), desktopPane);
+				detallePj.setVisible(true);
+				desktopPane.add(detallePj);
 				try {
-					listaPj.setSelected(true);
-				} catch (java.beans.PropertyVetoException e) {
+					detallePj.setSelected(true);
+				} catch (java.beans.PropertyVetoException e1) {
 				}
 			}
 		});

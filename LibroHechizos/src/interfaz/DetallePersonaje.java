@@ -197,7 +197,7 @@ public class DetallePersonaje extends JInternalFrame {
 		//LIstmodels
 		
 		conjConocidos = new DefaultListModel<Hechizo>();
-		for (Hechizo hechizo : LibroConjurosPrincipal.HECHIZOS) {
+		for (Hechizo hechizo : Principal.HECHIZOS) {
 			conjConocidos.addElement(hechizo);
 		}
 		conjPreparados = new DefaultListModel<Hechizo>();
@@ -327,8 +327,8 @@ public class DetallePersonaje extends JInternalFrame {
 		panel_infoBasica.add(lblAtBase);
 		
 		JLabel lblConjurosDiarios = new JLabel("Conjuros diarios:");
-		lblConjurosDiarios.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblConjurosDiarios.setBounds(56, 26, 96, 16);
+		lblConjurosDiarios.setHorizontalAlignment(SwingConstants.LEFT);
+		lblConjurosDiarios.setBounds(12, 36, 96, 16);
 		panel_Conjuros.add(lblConjurosDiarios);
 		
 		JLabel lblConjurosConocidos = new JLabel("Conjuros conocidos:");
@@ -342,88 +342,88 @@ public class DetallePersonaje extends JInternalFrame {
 		panel_Conjuros.add(lblConjurosPreparados);
 		
 		JLabel lblNiveles = new JLabel("Niveles:");
-		lblNiveles.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblNiveles.setBounds(97, 12, 55, 16);
+		lblNiveles.setHorizontalAlignment(SwingConstants.LEFT);
+		lblNiveles.setBounds(12, 22, 55, 16);
 		panel_Conjuros.add(lblNiveles);
 		
 		JLabel label = new JLabel("0");
-		label.setBounds(164, 12, 12, 16);
+		label.setBounds(115, 22, 12, 16);
 		panel_Conjuros.add(label);
 		
 		JLabel label_2 = new JLabel("1");
-		label_2.setBounds(188, 12, 12, 16);
+		label_2.setBounds(139, 22, 12, 16);
 		panel_Conjuros.add(label_2);
 		
 		JLabel label_4 = new JLabel("2");
-		label_4.setBounds(212, 12, 12, 16);
+		label_4.setBounds(163, 22, 12, 16);
 		panel_Conjuros.add(label_4);
 		
 		JLabel label_5 = new JLabel("3");
-		label_5.setBounds(236, 12, 12, 16);
+		label_5.setBounds(187, 22, 12, 16);
 		panel_Conjuros.add(label_5);
 		
 		JLabel label_6 = new JLabel("4");
-		label_6.setBounds(260, 12, 12, 16);
+		label_6.setBounds(211, 22, 12, 16);
 		panel_Conjuros.add(label_6);
 		
 		JLabel label_7 = new JLabel("5");
-		label_7.setBounds(284, 12, 12, 16);
+		label_7.setBounds(235, 22, 12, 16);
 		panel_Conjuros.add(label_7);
 		
 		JLabel label_8 = new JLabel("6");
-		label_8.setBounds(308, 12, 12, 16);
+		label_8.setBounds(259, 22, 12, 16);
 		panel_Conjuros.add(label_8);
 		
 		JLabel label_9 = new JLabel("7");
-		label_9.setBounds(332, 12, 12, 16);
+		label_9.setBounds(283, 22, 12, 16);
 		panel_Conjuros.add(label_9);
 		
 		JLabel label_10 = new JLabel("8");
-		label_10.setBounds(356, 12, 12, 16);
+		label_10.setBounds(307, 22, 12, 16);
 		panel_Conjuros.add(label_10);
 		
 		JLabel label_20 = new JLabel("9");
-		label_20.setBounds(380, 12, 12, 16);
+		label_20.setBounds(331, 22, 12, 16);
 		panel_Conjuros.add(label_20);
 		
 		lblDiarios0 = new JLabel(String.valueOf(pj.getConjurosDiarios()[0]));
-		lblDiarios0.setBounds(164, 26, 12, 16);
+		lblDiarios0.setBounds(115, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios0);
 		
 		lblDiarios1 = new JLabel(String.valueOf(pj.getConjurosDiarios()[1]));
-		lblDiarios1.setBounds(188, 26, 12, 16);
+		lblDiarios1.setBounds(139, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios1);
 		
 		lblDiarios2 = new JLabel(String.valueOf(pj.getConjurosDiarios()[2]));
-		lblDiarios2.setBounds(212, 26, 12, 16);
+		lblDiarios2.setBounds(163, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios2);
 		
 		lblDiarios3 = new JLabel(String.valueOf(pj.getConjurosDiarios()[3]));
-		lblDiarios3.setBounds(236, 26, 12, 16);
+		lblDiarios3.setBounds(187, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios3);
 		
 		lblDiarios4 = new JLabel(String.valueOf(pj.getConjurosDiarios()[4]));
-		lblDiarios4.setBounds(260, 26, 12, 16);
+		lblDiarios4.setBounds(211, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios4);
 		
 		lblDiarios5 = new JLabel(String.valueOf(pj.getConjurosDiarios()[5]));
-		lblDiarios5.setBounds(284, 26, 12, 16);
+		lblDiarios5.setBounds(235, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios5);
 		
 		lblDiarios6 = new JLabel(String.valueOf(pj.getConjurosDiarios()[6]));
-		lblDiarios6.setBounds(308, 26, 12, 16);
+		lblDiarios6.setBounds(259, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios6);
 		
 		lblDiarios7 = new JLabel(String.valueOf(pj.getConjurosDiarios()[7]));
-		lblDiarios7.setBounds(332, 26, 12, 16);
+		lblDiarios7.setBounds(283, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios7);
 		
 		lblDiarios8 = new JLabel(String.valueOf(pj.getConjurosDiarios()[8]));
-		lblDiarios8.setBounds(356, 26, 12, 16);
+		lblDiarios8.setBounds(307, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios8);
 		
 		lblDiarios9 = new JLabel(String.valueOf(pj.getConjurosDiarios()[9]));
-		lblDiarios9.setBounds(380, 26, 12, 16);
+		lblDiarios9.setBounds(331, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios9);
 		
 		//Eventos al modificar una caracteristica en el Splitter (uno para cada caracteristica!)
@@ -481,19 +481,30 @@ public class DetallePersonaje extends JInternalFrame {
 					}
 				}
 			}
-
-			private void actualizarLabelConjDiario() {
-				lblDiarios0.setText(String.valueOf(pj.getConjurosDiarios()[0]));
-				lblDiarios1.setText(String.valueOf(pj.getConjurosDiarios()[1]));
-				lblDiarios2.setText(String.valueOf(pj.getConjurosDiarios()[2]));
-				lblDiarios3.setText(String.valueOf(pj.getConjurosDiarios()[3]));
-				lblDiarios4.setText(String.valueOf(pj.getConjurosDiarios()[4]));
-				lblDiarios5.setText(String.valueOf(pj.getConjurosDiarios()[5]));
-				lblDiarios6.setText(String.valueOf(pj.getConjurosDiarios()[6]));
-				lblDiarios7.setText(String.valueOf(pj.getConjurosDiarios()[7]));
-				lblDiarios8.setText(String.valueOf(pj.getConjurosDiarios()[8]));
-				lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
+		});
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (listPreparados.getSelectedValue()!=null) {
+					conjPreparados.removeElement(listPreparados.getSelectedValue());
+					pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]+1, listConocidos.getSelectedValue().getNivelHechizo());
+					actualizarLabelConjDiario();
+				}
 			}
 		});
+		
+	}
+
+	private void actualizarLabelConjDiario() {
+		lblDiarios0.setText(String.valueOf(pj.getConjurosDiarios()[0]));
+		lblDiarios1.setText(String.valueOf(pj.getConjurosDiarios()[1]));
+		lblDiarios2.setText(String.valueOf(pj.getConjurosDiarios()[2]));
+		lblDiarios3.setText(String.valueOf(pj.getConjurosDiarios()[3]));
+		lblDiarios4.setText(String.valueOf(pj.getConjurosDiarios()[4]));
+		lblDiarios5.setText(String.valueOf(pj.getConjurosDiarios()[5]));
+		lblDiarios6.setText(String.valueOf(pj.getConjurosDiarios()[6]));
+		lblDiarios7.setText(String.valueOf(pj.getConjurosDiarios()[7]));
+		lblDiarios8.setText(String.valueOf(pj.getConjurosDiarios()[8]));
+		lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
 	}
 }
