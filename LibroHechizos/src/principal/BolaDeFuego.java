@@ -20,9 +20,9 @@ public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable{
 		// Crea la matriz que representa la tirada de dados (ver clase "Tirada"). En este caso, 1d6 x nivel, max 10d6.
 		int[][] matrizTirada;
 		if (super.nivelDelLanzador < 10) {
-			matrizTirada = new int[][] { { super.nivelDelLanzador }, { 6 } };
+			matrizTirada = new int[][] {{super.nivelDelLanzador, 6},{0,0}};
 		} else {
-			matrizTirada = new int[][] { { 10 }, { 6 } };
+			matrizTirada = new int[][] {{10,6},{0,0}};
 		}
 		// Crea una tirada
 		Tirada tirada = new Tirada(matrizTirada, 0);
