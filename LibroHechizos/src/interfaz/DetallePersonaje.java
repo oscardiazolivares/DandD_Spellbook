@@ -124,6 +124,7 @@ public class DetallePersonaje extends JInternalFrame {
 	private JLabel label_10;
 	private JLabel label_20;
 	private JButton btnVerConj;
+	private JLabel lblNombre;
 
 	/**
 	 * Create the frame.
@@ -136,202 +137,174 @@ public class DetallePersonaje extends JInternalFrame {
 		setBounds(100, 100, 853, 419);
 		getContentPane().setLayout(null);
 		
-		//Panels
+		generarPanels();
 		
-		panel_Caracteristicas = new JPanel();
-		panel_Caracteristicas.setBorder(new TitledBorder(null, "Caracter\u00EDsticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_Caracteristicas.setBounds(12, 147, 404, 123);
-		getContentPane().add(panel_Caracteristicas);
-		panel_Caracteristicas.setLayout(null);
+		generarSpinners();
 		
-		panel_infoBasica = new JPanel();
-		panel_infoBasica.setBorder(new TitledBorder(null, "Informaci\u00F3n b\u00E1sica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_infoBasica.setBounds(12, 12, 404, 123);
-		getContentPane().add(panel_infoBasica);
-		panel_infoBasica.setLayout(null);
-		
-		panel_Conjuros = new JPanel();
-		panel_Conjuros.setBorder(new TitledBorder(null, "Conjuros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_Conjuros.setBounds(428, 12, 404, 362);
-		getContentPane().add(panel_Conjuros);
-		panel_Conjuros.setLayout(null);
-		
-		//Spinner Models
-		
-		spinnerModelFue = new SpinnerNumberModel(pj.getFuerza(), 1, 29, 1);
-		spinnerModelDes = new SpinnerNumberModel(pj.getDestreza(), 1, 29, 1);
-		spinnerModelCon = new SpinnerNumberModel(pj.getConstitucion(), 1, 29, 1);
-		spinnerModelInt = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
-		spinnerModelSab = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
-		spinnerModelCar = new SpinnerNumberModel(pj.getCarisma(), 1, 29, 1);
-		
-		spinnerModelFueMod = new SpinnerNumberModel(pj.getModFue(), -5, 8, 1);
-		spinnerModelDesMod = new SpinnerNumberModel(pj.getModDes(), -5, 8, 1);
-		spinnerModelConMod = new SpinnerNumberModel(pj.getModCon(), -5, 8, 1);
-		spinnerModelIntMod = new SpinnerNumberModel(pj.getModInt(), -5, 8, 1);
-		spinnerModelSabMod = new SpinnerNumberModel(pj.getModSab(), -5, 8, 1);
-		spinnerModelCarMod = new SpinnerNumberModel(pj.getModCar(), -5, 8, 1);
-		
-		spinnerModelNivel = new SpinnerNumberModel(pj.getNivel(), 1, 20, 1);
-		spinnerModelCa = new SpinnerNumberModel(pj.getCa(), 0, 40, 1);
-		spinnerModelPg = new SpinnerNumberModel(pj.getPg(), -10, 999, 1);
-		spinnerModelAtaque = new SpinnerNumberModel(pj.getAtaqueBase(), 1, 20, 1);
-
-		spFue = new JSpinner(spinnerModelFue);
-		spFue.setEnabled(false);
-		spFue.setBounds(40, 42, 35, 20);
-		panel_Caracteristicas.add(spFue);
-		
-		spDes = new JSpinner(spinnerModelDes);
-		spDes.setEnabled(false);
-		spDes.setBounds(40, 70, 35, 20);
-		panel_Caracteristicas.add(spDes);
-		
-		spCon = new JSpinner(spinnerModelCon);
-		spCon.setEnabled(false);
-		spCon.setBounds(168, 42, 35, 20);
-		panel_Caracteristicas.add(spCon);
-		
-		spInt = new JSpinner(spinnerModelInt);
-		spInt.setEnabled(false);
-		spInt.setBounds(168, 70, 35, 20);
-		panel_Caracteristicas.add(spInt);
-		
-		spSab = new JSpinner(spinnerModelSab);
-		spSab.setEnabled(false);
-		spSab.setBounds(304, 42, 35, 20);
-		panel_Caracteristicas.add(spSab);
-		
-		spCar = new JSpinner(spinnerModelCar);
-		spCar.setEnabled(false);
-		spCar.setBounds(304, 70, 35, 20);
-		panel_Caracteristicas.add(spCar);
-		
-		spNivel = new JSpinner(spinnerModelNivel);
-		spNivel.setEnabled(false);
-		spNivel.setBounds(274, 55, 42, 20);
-		panel_infoBasica.add(spNivel);
-		
-		spCa = new JSpinner(spinnerModelCa);
-		spCa.setEnabled(false);
-		spCa.setBounds(259, 83, 35, 20);
-		panel_infoBasica.add(spCa);
-		
-		spPg = new JSpinner(spinnerModelPg);
-		spPg.setEnabled(false);
-		spPg.setBounds(352, 55, 35, 20);
-		panel_infoBasica.add(spPg);
-		
-		spAtaqueBase = new JSpinner(spinnerModelAtaque);
-		spAtaqueBase.setEnabled(false);
-		spAtaqueBase.setBounds(352, 83, 35, 20);
-		panel_infoBasica.add(spAtaqueBase);
-		
-		//Labels de modificadores
-		
-		lblModInt = new JLabel(String.valueOf(pj.getModInt()));
-		lblModInt.setHorizontalAlignment(SwingConstants.LEFT);
-		lblModInt.setBounds(215, 72, 35, 16);
-		panel_Caracteristicas.add(lblModInt);
-		
-		lblModCon = new JLabel(String.valueOf(pj.getModCon()));
-		lblModCon.setHorizontalAlignment(SwingConstants.LEFT);
-		lblModCon.setBounds(215, 45, 35, 16);
-		panel_Caracteristicas.add(lblModCon);
-		
-		lblModSab = new JLabel(String.valueOf(pj.getModSab()));
-		lblModSab.setHorizontalAlignment(SwingConstants.LEFT);
-		lblModSab.setBounds(351, 45, 35, 16);
-		panel_Caracteristicas.add(lblModSab);
-		
-		lblModCar = new JLabel(String.valueOf(pj.getModCar()));
-		lblModCar.setHorizontalAlignment(SwingConstants.LEFT);
-		lblModCar.setBounds(351, 73, 35, 16);
-		panel_Caracteristicas.add(lblModCar);
-		
-		lblModFue = new JLabel(String.valueOf(pj.getModFue()));
-		lblModFue.setHorizontalAlignment(SwingConstants.LEFT);
-		lblModFue.setBounds(90, 45, 35, 16);
-		panel_Caracteristicas.add(lblModFue);
-		
-		lblModDes = new JLabel(String.valueOf(pj.getModDes()));
-		lblModDes.setHorizontalAlignment(SwingConstants.LEFT);
-		lblModDes.setBounds(90, 72, 35, 16);
-		panel_Caracteristicas.add(lblModDes);
+		generarLabelsMod();
 				
-		//Comboboxes
+		generarCombos();
 		
-		comboBox_clase = new JComboBox(Clase.values());
-		comboBox_clase.setEnabled(false);
-		comboBox_clase.setBounds(70, 53, 153, 25);
-		panel_infoBasica.add(comboBox_clase);
+		generarTextFields();
 		
-		comboBox_raza = new JComboBox(Raza.values());
-		comboBox_raza.setEnabled(false);
-		comboBox_raza.setBounds(274, 25, 121, 25);
-		panel_infoBasica.add(comboBox_raza);
+		generarLists();
 		
-		//Textfields
+		generarButtons();
 		
-		textField_nombre = new JTextField(pj.getNombre());
-		textField_nombre.setEditable(false);
-		textField_nombre.setBounds(70, 27, 153, 20);
-		panel_infoBasica.add(textField_nombre);
-		textField_nombre.setColumns(10);
+		generarLabels();
 		
-		textField_alineamiento = new JTextField(pj.getAlineamiento());
-		textField_alineamiento.setEditable(false);
-		textField_alineamiento.setBounds(96, 83, 127, 20);
-		panel_infoBasica.add(textField_alineamiento);
-		textField_alineamiento.setColumns(10);
+		generarListeners();
 		
-		//LIstmodels
+	}
+
+	private void actualizarLabelConjDiario() {
+		lblDiarios0.setText(String.valueOf(pj.getConjurosDiarios()[0]));
+		lblDiarios1.setText(String.valueOf(pj.getConjurosDiarios()[1]));
+		lblDiarios2.setText(String.valueOf(pj.getConjurosDiarios()[2]));
+		lblDiarios3.setText(String.valueOf(pj.getConjurosDiarios()[3]));
+		lblDiarios4.setText(String.valueOf(pj.getConjurosDiarios()[4]));
+		lblDiarios5.setText(String.valueOf(pj.getConjurosDiarios()[5]));
+		lblDiarios6.setText(String.valueOf(pj.getConjurosDiarios()[6]));
+		lblDiarios7.setText(String.valueOf(pj.getConjurosDiarios()[7]));
+		lblDiarios8.setText(String.valueOf(pj.getConjurosDiarios()[8]));
+		lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
+	}
+	
+	private void generarConjConocidos(int nivelLanzador) {
+		conjConocidos.addElement(new BolaDeFuego(nivelLanzador));
+	}
+	
+	private void generarListeners() {
+		//Eventos al modificar una caracteristica en el Splitter (uno para cada caracteristica!)
+		spInt.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModInt.setText(String.valueOf(pj.calcularModificador((int)spInt.getValue())));
+			}
+		});
 		
-		conjConocidos = new DefaultListModel<Hechizo>();
-		generarConjConocidos(pj.getNivel());
-		conjPreparados = new DefaultListModel<Hechizo>();
+		spSab.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModSab.setText(String.valueOf(pj.calcularModificador((int)spSab.getValue())));
+			}
+		});
 		
-		//Lists
+		spCar.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModCar.setText(String.valueOf(pj.calcularModificador((int)spCar.getValue())));
+			}
+		});
 		
-		listConocidos = new JList<Hechizo>(conjConocidos);
-		listConocidos.setBounds(12, 75, 153, 221);
-		panel_Conjuros.add(listConocidos);
+		spFue.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModFue.setText(String.valueOf(pj.calcularModificador((int)spFue.getValue())));
+			}
+		});
 		
-		listPreparados = new JList<Hechizo>();
-		listPreparados.setBounds(236, 75, 153, 221);
-		panel_Conjuros.add(listPreparados);
+		spDes.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModDes.setText(String.valueOf(pj.calcularModificador((int)spDes.getValue())));
+			}
+		});
 		
-		//Buttons
+		spCon.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				lblModCon.setText(String.valueOf(pj.calcularModificador((int)spCon.getValue())));
+			}
+		});
 		
-		btnRestaurar = new JButton("Restaurar diarios");
-		btnRestaurar.setBounds(239, 330, 150, 20);
-		panel_Conjuros.add(btnRestaurar);
+		//Eventos para agregar o quitar conjuros de la lista de preparados
+		btnAgregarConj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (listConocidos.getSelectedValue()!=null) { //asegura que no es null (es decir, que hay un hechizo seleccionado)
+					if (pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]!=0) { //Si tiene algún conjuro diario del nivel del conjuro que quiere prepararse
+						//Reduce en 1 el nivel de conj. diario del conjuro a preparar 
+						// => Esto OBLIGA a crear un boton "Restaurar conj. diarios" que los devuelva a la normalidad y borre los conjuros.
+						pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]-1, listConocidos.getSelectedValue().getNivelHechizo());
+						
+						//Añade el conjuro a la lista de preparados
+						conjPreparados.addElement(listConocidos.getSelectedValue());
+						listPreparados.setModel(conjPreparados);
+						//Actualiza el texto de los label de conjuros diarios
+						actualizarLabelConjDiario();
+					} else {
+
+					}
+				}
+			}
+		});
 		
-		btnAgregarConj = new JButton(">");
-		btnAgregarConj.setEnabled(false);
-		btnAgregarConj.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnAgregarConj.setBounds(177, 75, 47, 32);
-		panel_Conjuros.add(btnAgregarConj);
+		btnEliminarConj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (listPreparados.getSelectedValue()!=null) {
+					conjPreparados.removeElement(listPreparados.getSelectedValue());
+					pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]+1, listConocidos.getSelectedValue().getNivelHechizo());
+					actualizarLabelConjDiario();
+				}
+			}
+		});
 		
-		btnEliminarConj = new JButton("<");
-		btnEliminarConj.setEnabled(false);
-		btnEliminarConj.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnEliminarConj.setBounds(177, 119, 47, 32);
-		panel_Conjuros.add(btnEliminarConj);
+		//Restaurar valores de hechizos diarios
 		
-		btnGuardarPj = new JButton("Guardar PJ");
-		btnGuardarPj.setEnabled(false);
-		btnGuardarPj.setBounds(290, 348, 126, 26);
-		getContentPane().add(btnGuardarPj);
+		btnRestaurar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Borrar la lista
+				conjPreparados= new DefaultListModel<Hechizo>();
+				listPreparados.setModel(conjPreparados);
+				//Restaurar los conjuros diarios del personaje
+				pj.setConjurosDiarios();
+				
+				actualizarLabelConjDiario();
+			}
+		});
 		
-		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(152, 348, 126, 26);
-		getContentPane().add(btnModificar);
+		//Modificar - activar todos los elementos que puedna ser editables por el usuario
 		
-		btnVerConj = new JButton("Lanzar conjuro");
-		btnVerConj.setBounds(239, 308, 150, 20);
-		panel_Conjuros.add(btnVerConj);
+		btnModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				textField_nombre.setEditable(true);
+				textField_alineamiento.setEditable(true);
+				
+				comboBox_clase.setEnabled(true);
+				comboBox_raza.setEnabled(true);
+				
+				spCa.setEnabled(true);
+				spPg.setEnabled(true);
+				spNivel.setEnabled(true);
+				spAtaqueBase.setEnabled(true);
+				
+				spFue.setEnabled(true);
+				spDes.setEnabled(true);
+				spCon.setEnabled(true);
+				spSab.setEnabled(true);
+				spInt.setEnabled(true);
+				spCar.setEnabled(true);
+				
+				btnAgregarConj.setEnabled(true);
+				btnEliminarConj.setEnabled(true);
+				btnGuardarPj.setEnabled(true);
+			}
+		});
 		
+		//Ver el hechizo selecionado
+		
+		btnVerConj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (listPreparados.getSelectedValue()!=null) {
+					DetalleHechizo internalFrame = new DetalleHechizo(listPreparados.getSelectedValue());
+					internalFrame.setVisible(true);
+					Principal.desktopPane.add(internalFrame);
+					try {
+						internalFrame.setSelected(true);
+					} catch (java.beans.PropertyVetoException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+	}
+
+	private void generarLabels() {
 		lblFue = new JLabel("FUE");
 		lblFue.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFue.setBounds(12, 44, 26, 16);
@@ -385,7 +358,8 @@ public class DetallePersonaje extends JInternalFrame {
 		label_1 = new JLabel("Mod.");
 		label_1.setBounds(218, 23, 35, 16);
 		panel_Caracteristicas.add(label_1);
-		JLabel lblNombre = new JLabel("Nombre:");
+		
+		lblNombre = new JLabel("Nombre:");
 		lblNombre.setBounds(12, 29, 55, 16);
 		panel_infoBasica.add(lblNombre);
 		
@@ -516,151 +490,215 @@ public class DetallePersonaje extends JInternalFrame {
 		lblDiarios9 = new JLabel(String.valueOf(pj.getConjurosDiarios()[9]));
 		lblDiarios9.setBounds(331, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios9);
-		
-		//Eventos al modificar una caracteristica en el Splitter (uno para cada caracteristica!)
-		spInt.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				lblModInt.setText(String.valueOf(pj.calcularModificador((int)spInt.getValue())));
-			}
-		});
-		
-		spSab.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				lblModSab.setText(String.valueOf(pj.calcularModificador((int)spSab.getValue())));
-			}
-		});
-		
-		spCar.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				lblModCar.setText(String.valueOf(pj.calcularModificador((int)spCar.getValue())));
-			}
-		});
-		
-		spFue.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				lblModFue.setText(String.valueOf(pj.calcularModificador((int)spFue.getValue())));
-			}
-		});
-		
-		spDes.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				lblModDes.setText(String.valueOf(pj.calcularModificador((int)spDes.getValue())));
-			}
-		});
-		
-		spCon.addChangeListener(new ChangeListener() {
-			public void stateChanged(ChangeEvent arg0) {
-				lblModCon.setText(String.valueOf(pj.calcularModificador((int)spCon.getValue())));
-			}
-		});
-		
-		//Eventos para agregar o quitar conjuros de la lista de preparados
-		btnAgregarConj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (listConocidos.getSelectedValue()!=null) { //asegura que no es null (es decir, que hay un hechizo seleccionado)
-					if (pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]!=0) { //Si tiene algún conjuro diario del nivel del conjuro que quiere prepararse
-						//Reduce en 1 el nivel de conj. diario del conjuro a preparar 
-						// => Esto OBLIGA a crear un boton "Restaurar conj. diarios" que los devuelva a la normalidad y borre los conjuros.
-						pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]-1, listConocidos.getSelectedValue().getNivelHechizo());
-						
-						//Añade el conjuro a la lista de preparados
-						conjPreparados.addElement(listConocidos.getSelectedValue());
-						listPreparados.setModel(conjPreparados);
-						//Actualiza el texto de los label de conjuros diarios
-						actualizarLabelConjDiario();
-					} else {
-
-					}
-				}
-			}
-		});
-		
-		btnEliminarConj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if (listPreparados.getSelectedValue()!=null) {
-					conjPreparados.removeElement(listPreparados.getSelectedValue());
-					pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]+1, listConocidos.getSelectedValue().getNivelHechizo());
-					actualizarLabelConjDiario();
-				}
-			}
-		});
-		
-		//Restaurar valores de hechizos diarios
-		
-		btnRestaurar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Borrar la lista
-				conjPreparados= new DefaultListModel<Hechizo>();
-				listPreparados.setModel(conjPreparados);
-				//Restaurar los conjuros diarios del personaje
-				pj.setConjurosDiarios();
-				
-				actualizarLabelConjDiario();
-			}
-		});
-		
-		//Modificar - activar todos los elementos que puedna ser editables por el usuario
-		
-		btnModificar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				textField_nombre.setEditable(true);
-				textField_alineamiento.setEditable(true);
-				
-				comboBox_clase.setEnabled(true);
-				comboBox_raza.setEnabled(true);
-				
-				spCa.setEnabled(true);
-				spPg.setEnabled(true);
-				spNivel.setEnabled(true);
-				spAtaqueBase.setEnabled(true);
-				
-				spFue.setEnabled(true);
-				spDes.setEnabled(true);
-				spCon.setEnabled(true);
-				spSab.setEnabled(true);
-				spInt.setEnabled(true);
-				spCar.setEnabled(true);
-				
-				btnAgregarConj.setEnabled(true);
-				btnEliminarConj.setEnabled(true);
-				btnGuardarPj.setEnabled(true);
-			}
-		});
-		
-		//Ver el hechizo selecionado
-		
-		btnVerConj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (listPreparados.getSelectedValue()!=null) {
-					DetalleHechizo internalFrame = new DetalleHechizo(listPreparados.getSelectedValue());
-					internalFrame.setVisible(true);
-					Principal.desktopPane.add(internalFrame);
-					try {
-						internalFrame.setSelected(true);
-					} catch (java.beans.PropertyVetoException e1) {
-						e1.printStackTrace();
-					}
-				}
-			}
-		});
-		
 	}
 
-	private void actualizarLabelConjDiario() {
-		lblDiarios0.setText(String.valueOf(pj.getConjurosDiarios()[0]));
-		lblDiarios1.setText(String.valueOf(pj.getConjurosDiarios()[1]));
-		lblDiarios2.setText(String.valueOf(pj.getConjurosDiarios()[2]));
-		lblDiarios3.setText(String.valueOf(pj.getConjurosDiarios()[3]));
-		lblDiarios4.setText(String.valueOf(pj.getConjurosDiarios()[4]));
-		lblDiarios5.setText(String.valueOf(pj.getConjurosDiarios()[5]));
-		lblDiarios6.setText(String.valueOf(pj.getConjurosDiarios()[6]));
-		lblDiarios7.setText(String.valueOf(pj.getConjurosDiarios()[7]));
-		lblDiarios8.setText(String.valueOf(pj.getConjurosDiarios()[8]));
-		lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
+	private void generarButtons() {
+		//Buttons
+		
+		btnRestaurar = new JButton("Restaurar diarios");
+		btnRestaurar.setBounds(239, 330, 150, 20);
+		panel_Conjuros.add(btnRestaurar);
+		
+		btnAgregarConj = new JButton(">");
+		btnAgregarConj.setEnabled(false);
+		btnAgregarConj.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnAgregarConj.setBounds(177, 75, 47, 32);
+		panel_Conjuros.add(btnAgregarConj);
+		
+		btnEliminarConj = new JButton("<");
+		btnEliminarConj.setEnabled(false);
+		btnEliminarConj.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnEliminarConj.setBounds(177, 119, 47, 32);
+		panel_Conjuros.add(btnEliminarConj);
+		
+		btnGuardarPj = new JButton("Guardar PJ");
+		btnGuardarPj.setEnabled(false);
+		btnGuardarPj.setBounds(290, 348, 126, 26);
+		getContentPane().add(btnGuardarPj);
+		
+		btnModificar = new JButton("Modificar");
+		btnModificar.setBounds(152, 348, 126, 26);
+		getContentPane().add(btnModificar);
+		
+		btnVerConj = new JButton("Lanzar conjuro");
+		btnVerConj.setBounds(239, 308, 150, 20);
+		panel_Conjuros.add(btnVerConj);
 	}
-	
-	private void generarConjConocidos(int nivelLanzador) {
-		conjConocidos.addElement(new BolaDeFuego(nivelLanzador));
+
+	private void generarLists() {
+		//LIstmodels
+		
+		conjConocidos = new DefaultListModel<Hechizo>();
+		generarConjConocidos(pj.getNivel());
+		conjPreparados = new DefaultListModel<Hechizo>();
+		
+		//Lists
+		
+		listConocidos = new JList<Hechizo>(conjConocidos);
+		listConocidos.setBounds(12, 75, 153, 221);
+		panel_Conjuros.add(listConocidos);
+		
+		listPreparados = new JList<Hechizo>();
+		listPreparados.setBounds(236, 75, 153, 221);
+		panel_Conjuros.add(listPreparados);
+	}
+
+	private void generarTextFields() {
+		//Textfields
+		
+		textField_nombre = new JTextField(pj.getNombre());
+		textField_nombre.setEditable(false);
+		textField_nombre.setBounds(70, 27, 153, 20);
+		panel_infoBasica.add(textField_nombre);
+		textField_nombre.setColumns(10);
+		
+		textField_alineamiento = new JTextField(pj.getAlineamiento());
+		textField_alineamiento.setEditable(false);
+		textField_alineamiento.setBounds(96, 83, 127, 20);
+		panel_infoBasica.add(textField_alineamiento);
+		textField_alineamiento.setColumns(10);
+	}
+
+	private void generarCombos() {
+		//Comboboxes
+		
+		comboBox_clase = new JComboBox(Clase.values());
+		comboBox_clase.setEnabled(false);
+		comboBox_clase.setBounds(70, 53, 153, 25);
+		panel_infoBasica.add(comboBox_clase);
+		
+		comboBox_raza = new JComboBox(Raza.values());
+		comboBox_raza.setEnabled(false);
+		comboBox_raza.setBounds(274, 25, 121, 25);
+		panel_infoBasica.add(comboBox_raza);
+	}
+
+	private void generarLabelsMod() {
+		//Labels de modificadores
+		
+		lblModInt = new JLabel(String.valueOf(pj.getModInt()));
+		lblModInt.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModInt.setBounds(215, 72, 35, 16);
+		panel_Caracteristicas.add(lblModInt);
+		
+		lblModCon = new JLabel(String.valueOf(pj.getModCon()));
+		lblModCon.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModCon.setBounds(215, 45, 35, 16);
+		panel_Caracteristicas.add(lblModCon);
+		
+		lblModSab = new JLabel(String.valueOf(pj.getModSab()));
+		lblModSab.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModSab.setBounds(351, 45, 35, 16);
+		panel_Caracteristicas.add(lblModSab);
+		
+		lblModCar = new JLabel(String.valueOf(pj.getModCar()));
+		lblModCar.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModCar.setBounds(351, 73, 35, 16);
+		panel_Caracteristicas.add(lblModCar);
+		
+		lblModFue = new JLabel(String.valueOf(pj.getModFue()));
+		lblModFue.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModFue.setBounds(90, 45, 35, 16);
+		panel_Caracteristicas.add(lblModFue);
+		
+		lblModDes = new JLabel(String.valueOf(pj.getModDes()));
+		lblModDes.setHorizontalAlignment(SwingConstants.LEFT);
+		lblModDes.setBounds(90, 72, 35, 16);
+		panel_Caracteristicas.add(lblModDes);
+	}
+
+	private void generarSpinners() {
+		//Spinner Models
+		
+		spinnerModelFue = new SpinnerNumberModel(pj.getFuerza(), 1, 29, 1);
+		spinnerModelDes = new SpinnerNumberModel(pj.getDestreza(), 1, 29, 1);
+		spinnerModelCon = new SpinnerNumberModel(pj.getConstitucion(), 1, 29, 1);
+		spinnerModelInt = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
+		spinnerModelSab = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
+		spinnerModelCar = new SpinnerNumberModel(pj.getCarisma(), 1, 29, 1);
+		
+		spinnerModelFueMod = new SpinnerNumberModel(pj.getModFue(), -5, 8, 1);
+		spinnerModelDesMod = new SpinnerNumberModel(pj.getModDes(), -5, 8, 1);
+		spinnerModelConMod = new SpinnerNumberModel(pj.getModCon(), -5, 8, 1);
+		spinnerModelIntMod = new SpinnerNumberModel(pj.getModInt(), -5, 8, 1);
+		spinnerModelSabMod = new SpinnerNumberModel(pj.getModSab(), -5, 8, 1);
+		spinnerModelCarMod = new SpinnerNumberModel(pj.getModCar(), -5, 8, 1);
+		
+		spinnerModelNivel = new SpinnerNumberModel(pj.getNivel(), 1, 20, 1);
+		spinnerModelCa = new SpinnerNumberModel(pj.getCa(), 0, 40, 1);
+		spinnerModelPg = new SpinnerNumberModel(pj.getPg(), -10, 999, 1);
+		spinnerModelAtaque = new SpinnerNumberModel(pj.getAtaqueBase(), 1, 20, 1);
+
+		spFue = new JSpinner(spinnerModelFue);
+		spFue.setEnabled(false);
+		spFue.setBounds(40, 42, 35, 20);
+		panel_Caracteristicas.add(spFue);
+		
+		spDes = new JSpinner(spinnerModelDes);
+		spDes.setEnabled(false);
+		spDes.setBounds(40, 70, 35, 20);
+		panel_Caracteristicas.add(spDes);
+		
+		spCon = new JSpinner(spinnerModelCon);
+		spCon.setEnabled(false);
+		spCon.setBounds(168, 42, 35, 20);
+		panel_Caracteristicas.add(spCon);
+		
+		spInt = new JSpinner(spinnerModelInt);
+		spInt.setEnabled(false);
+		spInt.setBounds(168, 70, 35, 20);
+		panel_Caracteristicas.add(spInt);
+		
+		spSab = new JSpinner(spinnerModelSab);
+		spSab.setEnabled(false);
+		spSab.setBounds(304, 42, 35, 20);
+		panel_Caracteristicas.add(spSab);
+		
+		spCar = new JSpinner(spinnerModelCar);
+		spCar.setEnabled(false);
+		spCar.setBounds(304, 70, 35, 20);
+		panel_Caracteristicas.add(spCar);
+		
+		spNivel = new JSpinner(spinnerModelNivel);
+		spNivel.setEnabled(false);
+		spNivel.setBounds(274, 55, 42, 20);
+		panel_infoBasica.add(spNivel);
+		
+		spCa = new JSpinner(spinnerModelCa);
+		spCa.setEnabled(false);
+		spCa.setBounds(259, 83, 35, 20);
+		panel_infoBasica.add(spCa);
+		
+		spPg = new JSpinner(spinnerModelPg);
+		spPg.setEnabled(false);
+		spPg.setBounds(352, 55, 35, 20);
+		panel_infoBasica.add(spPg);
+		
+		spAtaqueBase = new JSpinner(spinnerModelAtaque);
+		spAtaqueBase.setEnabled(false);
+		spAtaqueBase.setBounds(352, 83, 35, 20);
+		panel_infoBasica.add(spAtaqueBase);
+	}
+
+	private void generarPanels() {
+		//Panels
+		
+		panel_Caracteristicas = new JPanel();
+		panel_Caracteristicas.setBorder(new TitledBorder(null, "Caracter\u00EDsticas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_Caracteristicas.setBounds(12, 147, 404, 123);
+		getContentPane().add(panel_Caracteristicas);
+		panel_Caracteristicas.setLayout(null);
+		
+		panel_infoBasica = new JPanel();
+		panel_infoBasica.setBorder(new TitledBorder(null, "Informaci\u00F3n b\u00E1sica", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_infoBasica.setBounds(12, 12, 404, 123);
+		getContentPane().add(panel_infoBasica);
+		panel_infoBasica.setLayout(null);
+		
+		panel_Conjuros = new JPanel();
+		panel_Conjuros.setBorder(new TitledBorder(null, "Conjuros", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_Conjuros.setBounds(428, 12, 404, 362);
+		getContentPane().add(panel_Conjuros);
+		panel_Conjuros.setLayout(null);
 	}
 }

@@ -622,5 +622,12 @@ public class Personaje {
 			this.conjurosDiarios[nivelACambiar]=nuevoValor;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return nombre + ", " + clase.getNombre() + " de nivel " + nivel;
+	}
+	
+	
 	
 }
