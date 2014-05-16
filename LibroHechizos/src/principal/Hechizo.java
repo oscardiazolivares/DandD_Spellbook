@@ -66,7 +66,7 @@ public class Hechizo {
 	public Hechizo(String nombre, Escuela escuela, String subescuela,
 			Descriptor descriptor, int nivelConjuro, Componente[] componentes,
 			String descripcion, TiempoLanzamiento tiempoLanzamiento,
-			Alcance alcance, String duracion, String ts, int nivel) {
+			Alcance alcance, String duracion, String ts) {
 		super();
 		this.nombre = nombre;
 		this.escuela = escuela;
@@ -79,7 +79,7 @@ public class Hechizo {
 		this.alcance = alcance;
 		this.duracion=duracion;
 		this.ts=ts;
-		this.nivelDelLanzador=nivel;
+		//this.nivelDelLanzador=nivel;
 	}
 
 	/**
@@ -165,6 +165,14 @@ public class Hechizo {
 	public String getTs() {
 		return ts;
 	}
+
+	public void setNivelDelLanzador(int nivelDelLanzador) {
+		this.nivelDelLanzador = nivelDelLanzador;
+	}
+	
+	//setPies() {
+	//	pies=Alcance.calculardistancia(enumeracion,nivel);
+	//}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

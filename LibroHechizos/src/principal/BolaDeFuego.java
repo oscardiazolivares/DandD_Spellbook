@@ -2,7 +2,7 @@ package principal;
 
 public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable{
 
-	public BolaDeFuego(int nivelLanzador) {
+	public BolaDeFuego() {
 		super(
 				"Bola de Fuego",
 				Escuela.EVOCACION,
@@ -11,8 +11,8 @@ public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable{
 				(short) 3,
 				new Componente[] { Componente.VERBAL, Componente.SOMATICO, Componente.MATERIAL },
 				"Un conjuro de Bola de fuego es una explosión de llamas que detona con un estampido grave e inflige 1d6 puntos de daño por nivel de lanzador (máximo 10d6)",
-				TiempoLanzamiento.ESTANDAR, new Alcance(), "Instantánea", "Reflejos mitad", nivelLanzador);
-		super.alcance.alcanceLargo(nivelLanzador);
+				TiempoLanzamiento.ESTANDAR, new Alcance(), "Instantánea", "Reflejos mitad");
+		//super.alcance.alcanceLargo(nivelLanzador);
 	}
 	@Override
 	public int calcularPuntosGolpe() {

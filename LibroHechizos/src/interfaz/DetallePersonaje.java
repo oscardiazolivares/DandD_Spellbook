@@ -29,6 +29,7 @@ import javax.swing.event.ChangeEvent;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Iterator;
 
 public class DetallePersonaje extends JInternalFrame {
 	private JTextField textField_nombre;
@@ -37,7 +38,7 @@ public class DetallePersonaje extends JInternalFrame {
 	private JList<Hechizo> listConocidos;
 	private JList<Hechizo> listPreparados;
 	private DefaultListModel<Hechizo> conjConocidos;
-	private DefaultListModel<Hechizo> conjPreparados;
+	private DefaultListModel<Hechizo> conjPreparados; //static para poder cerrarlo al lanzar el hechizo desde DetalleHchizo
 	private JLabel lblDiarios0;
 	private JLabel lblDiarios1;
 	private JLabel lblDiarios2;
@@ -170,8 +171,12 @@ public class DetallePersonaje extends JInternalFrame {
 		lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
 	}
 	
-	private void generarConjConocidos(int nivelLanzador) {
-		conjConocidos.addElement(new BolaDeFuego(nivelLanzador));
+	private void generarConjConocidos() {
+		for (Iterator iterator = Principal.hechizos.iterator(); iterator.hasNext();) {
+			Hechizo hechizo = (Hechizo) iterator.next();
+			conjConocidos.addElement(hechizo);
+		}
+		
 	}
 	
 	private void generarListeners() {
@@ -221,8 +226,13 @@ public class DetallePersonaje extends JInternalFrame {
 						// => Esto OBLIGA a crear un boton "Restaurar conj. diarios" que los devuelva a la normalidad y borre los conjuros.
 						pj.setConjuroDiarioNivel(pj.getConjurosDiarios()[listConocidos.getSelectedValue().getNivelHechizo()]-1, listConocidos.getSelectedValue().getNivelHechizo());
 						
+						//Asigna el nivel del pj al nivel de lanzador del hechizo
+						Hechizo hechizoPreparado = listConocidos.getSelectedValue();
+						hechizoPreparado.setNivelDelLanzador(pj.getNivel());
+						//hechizoPreparado.setPies();
+						//hechizoPreparado.setAlcance(nivel);
 						//Añade el conjuro a la lista de preparados
-						conjPreparados.addElement(listConocidos.getSelectedValue());
+						conjPreparados.addElement(hechizoPreparado);
 						listPreparados.setModel(conjPreparados);
 						//Actualiza el texto de los label de conjuros diarios
 						actualizarLabelConjDiario();
@@ -529,7 +539,7 @@ public class DetallePersonaje extends JInternalFrame {
 		//LIstmodels
 		
 		conjConocidos = new DefaultListModel<Hechizo>();
-		generarConjConocidos(pj.getNivel());
+		generarConjConocidos();
 		conjPreparados = new DefaultListModel<Hechizo>();
 		
 		//Lists

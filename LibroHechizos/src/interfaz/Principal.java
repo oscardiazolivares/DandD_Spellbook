@@ -39,6 +39,8 @@ public class Principal extends JFrame {
 	
 	//Arraylist de todos los personajes guardados (to-do: cargar desde archivo guardado)
 	ArrayList<Personaje> personajes = new ArrayList<Personaje>();
+	//Arraylist de todos los hechizos que existan
+	public static ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	
 	private JList<Personaje> listPersonajes;
 	private DefaultListModel<Personaje> modelPersonajes = new DefaultListModel<Personaje>();
@@ -76,6 +78,9 @@ public class Principal extends JFrame {
 		
 		//Carga el nuevo personaje en el arraylist
 		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
+		
+		//Carga los hechizos existentes
+		hechizos.add(new BolaDeFuego());
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
