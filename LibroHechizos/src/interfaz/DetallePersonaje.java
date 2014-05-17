@@ -31,6 +31,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.ContainerAdapter;
+import java.awt.event.ContainerEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class DetallePersonaje extends JInternalFrame {
 	private JTextField textField_nombre;
@@ -133,6 +139,7 @@ public class DetallePersonaje extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public DetallePersonaje(Personaje personaje, int indicePj) {
+				
 		this.indicePj=indicePj;
 		this.pj=personaje;
 		setTitle(pj.getNombre() + ": " + pj.getClase().getNombre() + " de nivel " + pj.getNivel());
@@ -184,12 +191,11 @@ public class DetallePersonaje extends JInternalFrame {
 	
 	private void generarConjPreparados() {
 		if (pj.getConjurosPreparados()!=null) {
+			conjPreparados.removeAllElements();
 			for (Iterator iterator = pj.getConjurosPreparados().iterator(); iterator.hasNext();) {
 				Hechizo hechizo = (Hechizo) iterator.next();
 				conjPreparados.addElement(hechizo);
 			}
-			
-			//listPreparados.setModel(conjPreparados);
 		}
 		
 	}
@@ -320,7 +326,8 @@ public class DetallePersonaje extends JInternalFrame {
 		btnVerConj.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listPreparados.getSelectedValue()!=null) {
-					DetalleHechizo internalFrame = new DetalleHechizo(listPreparados.getSelectedValue());
+					
+					DetalleHechizo internalFrame = new DetalleHechizo(listPreparados.getSelectedValue(), indicePj, listPreparados.getSelectedIndex());
 					internalFrame.setVisible(true);
 					Principal.desktopPane.add(internalFrame);
 					try {
@@ -328,6 +335,10 @@ public class DetallePersonaje extends JInternalFrame {
 					} catch (java.beans.PropertyVetoException e1) {
 						e1.printStackTrace();
 					}
+					
+					//Recargar lista de conj. preparados por si se hubiera lanzado.
+					generarConjPreparados();
+					listPreparados.setModel(conjPreparados);
 				}
 			}
 		});
@@ -374,6 +385,15 @@ public class DetallePersonaje extends JInternalFrame {
 					dispose();
 				}
 				
+			}
+		});
+		
+		//Refresca la lista cada vez que se lanza un hechizo (no encuentro otro evento que sea más efectivo que este)
+		
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameActivated(InternalFrameEvent e) {
+				generarConjPreparados();
 			}
 		});
 	}

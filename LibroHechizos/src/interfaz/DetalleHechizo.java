@@ -9,6 +9,7 @@ import javax.swing.border.TitledBorder;
 
 import principal.Hechizo;
 import principal.Mostrable;
+import principal.Personaje;
 
 import javax.swing.SwingConstants;
 import javax.swing.JTextArea;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 /**
  * Ventana que muestra el detalle de un conjuro concreto preparado.
@@ -30,21 +32,24 @@ public class DetalleHechizo extends JInternalFrame {
 	private static int openFrameCount = 0;
 	private static final int xOffset = 30, yOffset = 30;
 	private Hechizo hechizo;
-
-
+	private int indicePj;
+	private JButton btnLanzar;
+	private int indiceHechizo;
 
 	/**
 	 * Create the frame.
 	 */
-	public DetalleHechizo(final Hechizo hechizo) {
+	public DetalleHechizo(final Hechizo hechizo, final int indicePj, final int indiceHechizo) {
 		super("Conjuro: " + hechizo.getNombre(),
 		          false, //resizable
 		          true, //closable
 		          false, //maximizable
 		          true);//iconifiable
 		    // Set the window's location.
-		
-		    this.hechizo=hechizo;
+		    
+		this.indiceHechizo=indiceHechizo;
+		this.indicePj=indicePj;
+		this.hechizo=hechizo;
 
 		    ++openFrameCount;
 		setBounds(xOffset*openFrameCount, yOffset*openFrameCount, 445, 520);
@@ -153,7 +158,10 @@ public class DetalleHechizo extends JInternalFrame {
 		lblDuracionMostrado.setBounds(278, 389, 121, 16);
 		panel.add(lblDuracionMostrado);
 		
-		JButton btnLanzar = new JButton("Lanzar");
+		btnLanzar = new JButton("Lanzar");
+		btnLanzar.setBounds(325, 449, 98, 26);
+		getContentPane().add(btnLanzar);
+		
 		btnLanzar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//Crear popUp con el resultado del hechizo
@@ -169,12 +177,20 @@ public class DetalleHechizo extends JInternalFrame {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				//Elimina el conj. preparado del pj
+				Personaje nor = Principal.personajes.get(indicePj);
+				ArrayList<Hechizo> preparados = nor.getConjurosPreparados();
+				preparados.remove(indiceHechizo);
+				Principal.personajes.get(indicePj).setConjurosPreparados(preparados);
+				preparados = nor.getConjurosPreparados();
+				
+				//Cierra la ventana del hechizo
+				dispose();
 			}
 		});
-		btnLanzar.setBounds(325, 449, 98, 26);
-		getContentPane().add(btnLanzar);
-		
-
 
 	}
+	
+	
+	
 }
