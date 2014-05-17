@@ -9,10 +9,13 @@ import javax.swing.JButton;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -21,6 +24,7 @@ import javax.swing.UIManager;
 
 import principal.BolaDeFuego;
 import principal.Clase;
+import principal.Fichero;
 import principal.Hechizo;
 import principal.Personaje;
 import principal.Raza;
@@ -57,6 +61,9 @@ public class Principal extends JFrame {
 	private JMenuItem mntmAbout;
 	private JPanel panel;
 	
+	private Fichero fichero;
+	private JFileChooser selectorFichero;
+	
 
 	/**
 	 * Launch the application.
@@ -89,7 +96,7 @@ public class Principal extends JFrame {
 		setBounds(2, 50, 1000, 700);
 		
 		//Carga el nuevo personaje en el arraylist
-		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
+		//personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
 		
 		//Carga los hechizos existentes
 		hechizos.add(new BolaDeFuego());
@@ -144,14 +151,7 @@ public class Principal extends JFrame {
 		listPersonajes.setBounds(12, 22, 213, 468);
 		panel.add(listPersonajes);
 		
-		//Carga listModel
-		Personaje personajeAux;
-		for (Iterator<Personaje> iterator = personajes.iterator(); iterator.hasNext();) {
-			personajeAux = (Personaje) iterator.next();
-			modelPersonajes.addElement(personajeAux);
-		}
-				
-				listPersonajes.setModel(modelPersonajes);
+		cargarListModel();
 		
 		JButton btnAadir = new JButton("Nuevo");
 		btnAadir.setBounds(12, 502, 98, 26);
@@ -178,6 +178,54 @@ public class Principal extends JFrame {
 				}
 			}
 		});
+		
+		//Guardar como...
+		mntmSaveAs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				selectorFichero = new JFileChooser();
+				int seleccion = selectorFichero.showSaveDialog(contentPane);
+				File file = selectorFichero.getSelectedFile();
+				if (seleccion == JFileChooser.APPROVE_OPTION) {
+					try {
+						fichero = new Fichero(file.getCanonicalPath());
+						fichero.guardarFichero(personajes);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		//Abrir
+		mntmOpen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectorFichero = new JFileChooser();
+				int seleccion = selectorFichero.showOpenDialog(contentPane);
+				File file = selectorFichero.getSelectedFile();
+
+				if (seleccion == JFileChooser.APPROVE_OPTION) {
+					try {
+						fichero = new Fichero(file.getCanonicalPath());
+						personajes = fichero.leerFichero();
+						cargarListModel();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+		
+		
+	}
+
+	private void cargarListModel() {
+		Personaje personajeAux;
+		for (Iterator<Personaje> iterator = personajes.iterator(); iterator.hasNext();) {
+			personajeAux = (Personaje) iterator.next();
+			modelPersonajes.addElement(personajeAux);
+		}
+				
+		listPersonajes.setModel(modelPersonajes);
 	}
 	
 	static boolean añadirPj(Personaje pjNuevo) {

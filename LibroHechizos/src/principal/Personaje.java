@@ -1,5 +1,6 @@
 package principal;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * @author Óscar Díaz Olivares
  * @version 1.0
  */
-public class Personaje {
+public class Personaje implements Serializable{
 
 	/**
 	 * Tabla de conjuros diarios para mago por nivel de lanzador. 
