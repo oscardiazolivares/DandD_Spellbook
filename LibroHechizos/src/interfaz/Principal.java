@@ -38,12 +38,24 @@ public class Principal extends JFrame {
 	public static JDesktopPane desktopPane=new JDesktopPane();
 	
 	//Arraylist de todos los personajes guardados (to-do: cargar desde archivo guardado)
-	ArrayList<Personaje> personajes = new ArrayList<Personaje>();
+	public static ArrayList<Personaje> personajes = new ArrayList<Personaje>();
 	//Arraylist de todos los hechizos que existan
 	public static ArrayList<Hechizo> hechizos = new ArrayList<Hechizo>();
 	
-	private JList<Personaje> listPersonajes;
-	private DefaultListModel<Personaje> modelPersonajes = new DefaultListModel<Personaje>();
+	private static JList<Personaje> listPersonajes;
+	private static DefaultListModel<Personaje> modelPersonajes = new DefaultListModel<Personaje>();
+	private JMenuBar menuBar;
+	private JMenu mnFile;
+	private JMenuItem mntmOpen;
+	private JSeparator separator;
+	private JMenuItem mntmSave;
+	private JMenuItem mntmSaveAs;
+	private JSeparator separator_1;
+	private JMenuItem mntmSalir;
+	private JMenu mnHelp;
+	private JMenuItem mntmHelp;
+	private JMenuItem mntmAbout;
+	private JPanel panel;
 	
 
 	/**
@@ -82,37 +94,37 @@ public class Principal extends JFrame {
 		//Carga los hechizos existentes
 		hechizos.add(new BolaDeFuego());
 		
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnFile = new JMenu("Archivo");
+		mnFile = new JMenu("Archivo");
 		menuBar.add(mnFile);
 		
-		JMenuItem mntmOpen = new JMenuItem("Abrir");
+		mntmOpen = new JMenuItem("Abrir");
 		mnFile.add(mntmOpen);
 		
-		JSeparator separator = new JSeparator();
+		separator = new JSeparator();
 		mnFile.add(separator);
 		
-		JMenuItem mntmSave = new JMenuItem("Guardar");
+		mntmSave = new JMenuItem("Guardar");
 		mnFile.add(mntmSave);
 		
-		JMenuItem mntmSaveAs = new JMenuItem("Guardar como...");
+		mntmSaveAs = new JMenuItem("Guardar como...");
 		mnFile.add(mntmSaveAs);
 		
-		JSeparator separator_1 = new JSeparator();
+		separator_1 = new JSeparator();
 		mnFile.add(separator_1);
 		
-		JMenuItem mntmSalir = new JMenuItem("Salir");
+		mntmSalir = new JMenuItem("Salir");
 		mnFile.add(mntmSalir);
 		
-		JMenu mnHelp = new JMenu("Ayuda");
+		mnHelp = new JMenu("Ayuda");
 		menuBar.add(mnHelp);
 		
-		JMenuItem mntmHelp = new JMenuItem("Ayuda");
+		mntmHelp = new JMenuItem("Ayuda");
 		mnHelp.add(mntmHelp);
 		
-		JMenuItem mntmAbout = new JMenuItem("Acerca de");
+		mntmAbout = new JMenuItem("Acerca de");
 		mnHelp.add(mntmAbout);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -122,7 +134,7 @@ public class Principal extends JFrame {
 		desktopPane.setBounds(0, 12, 994, 640);
 		contentPane.add(desktopPane);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Personajes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(12, 12, 237, 582);
 		desktopPane.add(panel);
@@ -156,7 +168,7 @@ public class Principal extends JFrame {
 		//Mostrar pj
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DetallePersonaje detallePj = new DetallePersonaje(listPersonajes.getSelectedValue());
+				DetallePersonaje detallePj = new DetallePersonaje(listPersonajes.getSelectedValue(), listPersonajes.getSelectedIndex());
 //						ListaHechizosPreparados listaHechizos = new ListaHechizosPreparados(list.getSelectedValue().getConjurosPreparados(), desktopPane);
 				detallePj.setVisible(true);
 				desktopPane.add(detallePj);
@@ -166,5 +178,25 @@ public class Principal extends JFrame {
 				}
 			}
 		});
+	}
+	
+	static boolean añadirPj(Personaje pjNuevo) {
+		
+		if (personajes.add(pjNuevo)) {
+			modelPersonajes.addElement(pjNuevo);
+			listPersonajes.setModel(modelPersonajes);
+			return true;
+		}
+		return false;		
+	}
+	
+	static boolean eliminarPj(int indice) {
+		
+		if (personajes.remove(indice)!=null) {
+			modelPersonajes.removeElementAt(indice);
+			listPersonajes.setModel(modelPersonajes);
+			return true;
+		}
+		return false;		
 	}
 }

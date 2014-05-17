@@ -126,7 +126,7 @@ public class Personaje {
 		setNombre(nombre);
 		setRaza(raza);
 		setClase(clase);
-		setNivel(nivel);
+		
 		setAlineamiento(alineamiento);
 		setFuerza(fuerza);
 		setDestreza(destreza);
@@ -137,6 +137,7 @@ public class Personaje {
 		setCa(ca);
 		setPg(pg);
 		setAtaqueBase(ataqueBase);
+		setNivel(nivel);
 
 		// Asignaciones automáticas
 		// Calculo de los modificadores de atributos
@@ -243,10 +244,10 @@ public class Personaje {
 		
 		if (getClase() == Clase.MAGO) { 
 			//Si es un mago, sus conj. adicionales depende del modificador de su Inteligencia
-			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModInt()-1]);
+			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModInt()]);
 		} else { 
 			//Sino, es hechicero, y sus conj. adicionales depende de su modificador de Sabiduria
-			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModSab()-1]);
+			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModSab()]);
 		}
 	}
 	
@@ -461,6 +462,7 @@ public class Personaje {
 	 */
 	private void setNivel(int nivel) {
 		this.nivel = nivel;
+		setConjurosDiarios();
 	}
 
 	/**
@@ -597,6 +599,14 @@ public class Personaje {
 	public void setConjurosDiarios() {
 		
 		this.conjurosDiarios = calcularConjurosAdicionales();
+	}
+	
+	/**
+	 * Define unos conjuros diarios concretos recibidos por parámetro.
+	 * @param conjurosDiarios
+	 */
+	public void setConjurosDiarios(int[] conjurosDiarios) {
+		this.conjurosDiarios=conjurosDiarios;
 	}
 
 	/**
