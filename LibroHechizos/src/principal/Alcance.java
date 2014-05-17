@@ -1,53 +1,41 @@
 package principal;
 
-public class Alcance {
-	private int pies; // -1 es Ilimitado
+public final class Alcance {
 
-	public void alcancePersonal() {
-		setPies(0);
-	}
-	
-	public void alcanceToque() {
-		setPies(5);
-	}
-	
-	public void alcanceCorto(int nivelLanzador) {
-		int bonificador = 5*((int)nivelLanzador/2);
-		setPies(25+bonificador);
-	}
-	
-	public void alcanceIntermedio(int nivelLanzador) {
-		setPies(100+10*nivelLanzador);
-	}
-	
-	public void alcanceLargo(int nivelLanzador) {
-		setPies(400+40*nivelLanzador);
-	}
-	
-	public void alcanceIlimitado() {
-		setPies(-1);
-	}
-	
-	public void alcanceConcreto(int alcance) {
-		if (alcance<0) {
-			setPies(0);
-		} else {
-			setPies(alcance);
+	public static int calcularAlcance (AlcanceEnum tipoAlcance, int nivel) {
+		
+		switch (tipoAlcance) {
+		case CORTO:
+			return alcanceCorto(nivel);
+		case INTERMEDIO:
+			return alcanceIntermedio(nivel);
+		case LARGO:
+			return alcanceLargo(nivel);
+		case PERSONAL:
+			return 0;
+		case TOQUE:
+			return 5;
+		case ILIMITADO:
+			return -1;
+		default:
+			break;
 		}
+		
+		return nivel;
+		
 	}
 	
-	/**
-	 * @return the pies
-	 */
-	public int getPies() {
-		return pies;
+	private static int alcanceCorto(int nivelLanzador) {
+		int bonificador = 5*((int)nivelLanzador/2);
+		return 25+bonificador;
 	}
-
-	/**
-	 * @param pies the pies to set
-	 */
-	private void setPies(int pies) {
-		this.pies = pies;
+	
+	private static int alcanceIntermedio(int nivelLanzador) {
+		return 100+10*nivelLanzador;
+	}
+	
+	private static int alcanceLargo(int nivelLanzador) {
+		return 400+40*nivelLanzador;
 	}
 	
 	

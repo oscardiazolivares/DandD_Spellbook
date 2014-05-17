@@ -120,7 +120,7 @@ public class DetalleHechizo extends JInternalFrame {
 		lblTiempoLanzamientoMostrado.setBounds(302, 134, 97, 16);
 		panel.add(lblTiempoLanzamientoMostrado);
 		
-		JLabel lblAlcanceMostrado = new JLabel(String.valueOf(hechizo.getAlcance().getPies()));
+		JLabel lblAlcanceMostrado = new JLabel(String.valueOf(hechizo.getAlcance()));
 		lblAlcanceMostrado.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblAlcanceMostrado.setBounds(344, 158, 55, 16);
 		panel.add(lblAlcanceMostrado);

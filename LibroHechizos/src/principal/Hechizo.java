@@ -1,6 +1,6 @@
 package principal;
 
-public class Hechizo {
+public class Hechizo implements AlcanceDefinible{
 
 	/**
 	 * Nombre normal del hechizo
@@ -37,7 +37,7 @@ public class Hechizo {
 	/**
 	 * Distancia máxima a la que puede lanzarse un conjuro.
 	 */
-	protected Alcance alcance;
+	protected int alcancePies;
 	/**
 	 * Duración del conjuro
 	 */
@@ -65,8 +65,7 @@ public class Hechizo {
 	 */
 	public Hechizo(String nombre, Escuela escuela, String subescuela,
 			Descriptor descriptor, int nivelConjuro, Componente[] componentes,
-			String descripcion, TiempoLanzamiento tiempoLanzamiento,
-			Alcance alcance, String duracion, String ts) {
+			String descripcion, TiempoLanzamiento tiempoLanzamiento, String duracion, String ts) {
 		super();
 		this.nombre = nombre;
 		this.escuela = escuela;
@@ -76,7 +75,6 @@ public class Hechizo {
 		this.componentes = componentes;
 		this.descripcion = descripcion;
 		this.tiempoLanzamiento = tiempoLanzamiento;
-		this.alcance = alcance;
 		this.duracion=duracion;
 		this.ts=ts;
 		//this.nivelDelLanzador=nivel;
@@ -141,8 +139,8 @@ public class Hechizo {
 	/**
 	 * @return Devuelve el valor del atributo alcance
 	 */
-	public Alcance getAlcance() {
-		return alcance;
+	public int getAlcance() {
+		return alcancePies;
 	}
 
 	/**
@@ -169,10 +167,6 @@ public class Hechizo {
 	public void setNivelDelLanzador(int nivelDelLanzador) {
 		this.nivelDelLanzador = nivelDelLanzador;
 	}
-	
-	//setPies() {
-	//	pies=Alcance.calculardistancia(enumeracion,nivel);
-	//}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -181,8 +175,11 @@ public class Hechizo {
 	public String toString() {
 		return nombre + " [" + nivelHechizo + "]";
 	}
-	
-	
-	
+
+	@Override
+	public void setAlcance(int nivel) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

@@ -229,8 +229,12 @@ public class DetallePersonaje extends JInternalFrame {
 						//Asigna el nivel del pj al nivel de lanzador del hechizo
 						Hechizo hechizoPreparado = listConocidos.getSelectedValue();
 						hechizoPreparado.setNivelDelLanzador(pj.getNivel());
+						
+						hechizoPreparado.setAlcance(pj.getNivel());
+						
 						//hechizoPreparado.setPies();
 						//hechizoPreparado.setAlcance(nivel);
+						
 						//Añade el conjuro a la lista de preparados
 						conjPreparados.addElement(hechizoPreparado);
 						listPreparados.setModel(conjPreparados);
