@@ -27,6 +27,7 @@ import java.awt.Font;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
+import java.awt.color.CMMException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
+
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionListener;
@@ -157,6 +159,9 @@ public class DetallePersonaje extends JInternalFrame {
 		generarLabelsMod();
 				
 		generarCombos();
+		//Seleccionar la opcion correspondiente de cada combobox
+		comboBox_clase.setSelectedItem(pj.getClase());
+		comboBox_raza.setSelectedItem(pj.getRaza());
 		
 		generarTextFields();
 		
