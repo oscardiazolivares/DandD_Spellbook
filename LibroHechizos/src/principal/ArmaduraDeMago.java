@@ -17,7 +17,7 @@ public class ArmaduraDeMago extends Hechizo implements Bonificante, Mostrable, A
 
 	@Override
 	public String mostrarResolucion() {
-		String resultado = "Te rodea un campo de fuerza invisible pero tangible que te otorga +4 de armadura a la Clase de armadura.";
+		String resultado = "Te rodea un campo de fuerza invisible pero tangible que te otorga +4 de armadura a la Clase de armadura. ";
 		return resultado;
 	}
 	
