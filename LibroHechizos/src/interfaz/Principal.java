@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 
 import principal.ArmaduraDeMago;
@@ -109,10 +111,13 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 		
 		mnFile = new JMenu("Archivo");
+		mnFile.setMnemonic('A');
 		menuBar.add(mnFile);
 		
 		mntmOpen = new JMenuItem("Abrir");
 		mnFile.add(mntmOpen);
+		mntmOpen.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_A, ActionEvent.CTRL_MASK));
 		
 		separator = new JSeparator();
 		mnFile.add(separator);
@@ -120,21 +125,30 @@ public class Principal extends JFrame {
 		mntmSave = new JMenuItem("Guardar");
 		mnFile.add(mntmSave);
 		mntmSave.setEnabled(false);
+		mntmSave.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_G, ActionEvent.CTRL_MASK));
 		
 		mntmSaveAs = new JMenuItem("Guardar como...");
 		mnFile.add(mntmSaveAs);
+		mntmSaveAs.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_H, ActionEvent.CTRL_MASK));
 		
 		separator_1 = new JSeparator();
 		mnFile.add(separator_1);
 		
 		mntmSalir = new JMenuItem("Salir");
 		mnFile.add(mntmSalir);
+		mntmSaveAs.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_S, ActionEvent.CTRL_MASK));
 		
 		mnHelp = new JMenu("Ayuda");
+		mnHelp.setMnemonic('U');
 		menuBar.add(mnHelp);
 		
 		mntmHelp = new JMenuItem("Ayuda");
 		mnHelp.add(mntmHelp);
+		mntmHelp.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_Y, ActionEvent.CTRL_MASK));
 		
 		mntmAbout = new JMenuItem("Acerca de");
 		mnHelp.add(mntmAbout);
@@ -173,15 +187,17 @@ public class Principal extends JFrame {
 		//Mostrar pj
 		btnMostrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				DetallePersonaje detallePj = new DetallePersonaje(listPersonajes.getSelectedValue(), listPersonajes.getSelectedIndex());
-//						ListaHechizosPreparados listaHechizos = new ListaHechizosPreparados(list.getSelectedValue().getConjurosPreparados(), desktopPane);
-				detallePj.setVisible(true);
-				desktopPane.add(detallePj);
-				try {
-					detallePj.setSelected(true);
-				} catch (java.beans.PropertyVetoException e1) {
-				}
-			}
+				if (listPersonajes.getSelectedValue()!=null) {
+					DetallePersonaje detallePj = new DetallePersonaje(listPersonajes.getSelectedValue(), listPersonajes.getSelectedIndex());
+					detallePj.setVisible(true);
+					desktopPane.add(detallePj);
+					try {
+						detallePj.setSelected(true);
+					} catch (java.beans.PropertyVetoException e1) {
+					}
+						}
+						
+					}
 		});
 		
 		//Nuevo
@@ -241,6 +257,15 @@ public class Principal extends JFrame {
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+				}
+			}
+		});
+		
+		//Eliminar
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (listPersonajes.getSelectedValue()!=null) {
+					eliminarPj(listPersonajes.getSelectedIndex());
 				}
 			}
 		});

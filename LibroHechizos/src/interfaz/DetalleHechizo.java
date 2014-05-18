@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.awt.Font;
 
 /**
  * Ventana que muestra el detalle de un conjuro concreto preparado.
@@ -57,7 +58,8 @@ public class DetalleHechizo extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(null, hechizo.getNombre() + " - NL " + hechizo.getNivelDelLanzador(), TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setFont(new Font("Dialog", Font.PLAIN, 12));
+		panel.setBorder(new TitledBorder(null, hechizo.getNombre() + " - NL " + hechizo.getNivelDelLanzador(), TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		panel.setBounds(12, 12, 411, 422);
 		getContentPane().add(panel);
 		panel.setLayout(null);
