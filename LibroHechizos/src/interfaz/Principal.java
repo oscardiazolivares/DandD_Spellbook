@@ -32,6 +32,7 @@ import principal.Hechizo;
 import principal.Personaje;
 import principal.RayoDeDebilitamiento;
 import principal.Raza;
+import principal.ResistenciaDeOso;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.JList;
@@ -106,6 +107,7 @@ public class Principal extends JFrame {
 		hechizos.add(new BolaDeFuego());
 		hechizos.add(new RayoDeDebilitamiento());
 		hechizos.add(new ArmaduraDeMago());
+		hechizos.add(new ResistenciaDeOso());
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
