@@ -3,6 +3,7 @@ package interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -138,7 +139,9 @@ public class DetallePersonaje extends JInternalFrame {
 	
 
 	/**
-	 * Create the frame.
+	 * Constructor de la interfaz para mostrar y modificar al personaje y sus hechizos.
+	 * @param personaje - el personaje a mostrar
+	 * @param indicePj - índice del personaje a mostrar en el ArrayList "personajes" de la clase Principal.
 	 */
 	public DetallePersonaje(Personaje personaje, final int indicePj) {
 				
@@ -181,58 +184,69 @@ public class DetallePersonaje extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				//Valida los valores de los componentes gráficos
-				
-				//Crea nuevo personaje con los valores de los componentes gráficos
-				Personaje pjModificado = new Personaje(
-						textField_nombre.getText(),
-						(Raza) comboBox_raza.getSelectedItem(),
-						(Clase) comboBox_clase.getSelectedItem(),
-						(int) spNivel.getValue(),
-						textField_alineamiento.getText(),
-						(int) spFue.getValue(),
-						(int) spDes.getValue(),
-						(int) spCon.getValue(),
-						(int) spInt.getValue(),
-						(int) spSab.getValue(),
-						(int) spCar.getValue(),
-						(int) spCa.getValue(),
-						(int) spPg.getValue(),
-						(int) spAtaqueBase.getValue() );
-				
-				//Extrae los conj. preparados de la interfaz y los pasa al personaje
-				ArrayList<Hechizo> preparados = new ArrayList<Hechizo>();
-				Hechizo aux;
-				for (int i = 0; i < conjPreparados.getSize(); i++) {
-					aux=conjPreparados.get(i);
-					preparados.add(aux);
-				}
-				pjModificado.setConjurosPreparados(preparados);
-				
-				//Si no ha cambiado el nivel, define los conj.diarios del nuevo personaje en base a los del anterior:
-				if (pjModificado.getNivel()==pj.getNivel()) {
-					pjModificado.setConjurosDiarios(pj.getConjurosDiarios());
-				} else { //Si ha cambiado, entonces se recalculan y se borran los conj.preparados
-					pjModificado.setConjurosDiarios();
-					pjModificado.setConjurosPreparados(new ArrayList<Hechizo>());
-				}
-				
-				
-				//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
-				if (Principal.añadirPj(pjModificado)) {
-					Principal.eliminarPj(indicePj);
-					dispose();
+				if (textField_nombre.getText().length()<2) {
+					Error err = new Error("Debe introducir un nombre de al menos 2 caracteres.");
+					err.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					err.setVisible(true);
+				} else if (textField_alineamiento.getText().length()<6){
+					Error err = new Error("Debe introducir un alineamiento válido. El que ha introducido es demasiado corto.");
+					err.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					err.setVisible(true);
+				} else {
+					//Crea nuevo personaje con los valores de los componentes gráficos
+					Personaje pjModificado = new Personaje(
+							textField_nombre.getText(),
+							(Raza) comboBox_raza.getSelectedItem(),
+							(Clase) comboBox_clase.getSelectedItem(),
+							(int) spNivel.getValue(),
+							textField_alineamiento.getText(),
+							(int) spFue.getValue(),
+							(int) spDes.getValue(),
+							(int) spCon.getValue(),
+							(int) spInt.getValue(),
+							(int) spSab.getValue(),
+							(int) spCar.getValue(),
+							(int) spCa.getValue(),
+							(int) spPg.getValue(),
+							(int) spAtaqueBase.getValue() );
+					
+					//Extrae los conj. preparados de la interfaz y los pasa al personaje
+					ArrayList<Hechizo> preparados = new ArrayList<Hechizo>();
+					Hechizo aux;
+					for (int i = 0; i < conjPreparados.getSize(); i++) {
+						aux=conjPreparados.get(i);
+						preparados.add(aux);
+					}
+					pjModificado.setConjurosPreparados(preparados);
+					
+					//Si no ha cambiado el nivel, define los conj.diarios del nuevo personaje en base a los del anterior:
+					if (pjModificado.getNivel()==pj.getNivel()) {
+						pjModificado.setConjurosDiarios(pj.getConjurosDiarios());
+					} else { //Si ha cambiado, entonces se recalculan y se borran los conj.preparados
+						pjModificado.setConjurosDiarios();
+						pjModificado.setConjurosPreparados(new ArrayList<Hechizo>());
+					}
+					
+					
+					//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
+					if (Principal.añadirPj(pjModificado)) {
+						Principal.eliminarPj(indicePj);
+						dispose();
+					}
 				}
 				
 			}
 		});
 		
 	}
-	
+	/**
+	 * Constructor de la interfaz para mostrar las características de un personaje nuevo y poder guardarlo.
+	 */
 	public DetallePersonaje() {
 		setTitle("Nuevo personaje");
 		setIconifiable(true);
 		setClosable(true);
-		setBounds(100, 100, 853, 419);
+		setBounds(100, 100, 437, 419);
 		getContentPane().setLayout(null);
 		
 		this.pj=new Personaje("", null, null, 1, "", 10, 10, 10, 10, 10, 10, 10, 1, 1);
@@ -266,37 +280,46 @@ public class DetallePersonaje extends JInternalFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				//Valida los valores de los componentes gráficos
-				
-				//Crea nuevo personaje con los valores de los componentes gráficos
-				Personaje pjModificado = new Personaje(
-						textField_nombre.getText(),
-						(Raza) comboBox_raza.getSelectedItem(),
-						(Clase) comboBox_clase.getSelectedItem(),
-						(int) spNivel.getValue(),
-						textField_alineamiento.getText(),
-						(int) spFue.getValue(),
-						(int) spDes.getValue(),
-						(int) spCon.getValue(),
-						(int) spInt.getValue(),
-						(int) spSab.getValue(),
-						(int) spCar.getValue(),
-						(int) spCa.getValue(),
-						(int) spPg.getValue(),
-						(int) spAtaqueBase.getValue() );
-						
-				//Define los conj.diarios del nuevo personaje
-				pjModificado.setConjurosDiarios();
-				
-				
-				//Introduce el personaje creado en el arraylist de personajes
-				if (Principal.añadirPj(pjModificado)) {
-					dispose();
+				if (textField_nombre.getText().length()<2) {
+					Error err = new Error("Debe introducir un nombre de al menos 2 caracteres.");
+					err.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					err.setVisible(true);
+				} else if (textField_alineamiento.getText().length()<6){
+					Error err = new Error("Debe introducir un alineamiento válido. El que ha introducido es demasiado corto.");
+					err.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					err.setVisible(true);
+				} else {
+					//Crea nuevo personaje con los valores de los componentes gráficos
+					Personaje pjModificado = new Personaje(
+							textField_nombre.getText(),
+							(Raza) comboBox_raza.getSelectedItem(),
+							(Clase) comboBox_clase.getSelectedItem(),
+							(int) spNivel.getValue(),
+							textField_alineamiento.getText(),
+							(int) spFue.getValue(),
+							(int) spDes.getValue(),
+							(int) spCon.getValue(),
+							(int) spInt.getValue(),
+							(int) spSab.getValue(),
+							(int) spCar.getValue(),
+							(int) spCa.getValue(),
+							(int) spPg.getValue(),
+							(int) spAtaqueBase.getValue() );
+							
+					//Define los conj.diarios del nuevo personaje
+					pjModificado.setConjurosDiarios();
+					
+					
+					//Introduce el personaje creado en el arraylist de personajes
+					if (Principal.añadirPj(pjModificado)) {
+						dispose();
+					}
 				}
-				
 			}
 		});
 		
-		
+		//Desactivamos la parte de hechizos cuando creamos un nuevo pj, ya que necesita su nivel para poder añadir hechizos.
+		panel_Conjuros.setVisible(false);
 	}
 
 	private void actualizarLabelConjDiario() {
