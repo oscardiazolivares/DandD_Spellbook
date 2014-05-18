@@ -37,15 +37,20 @@ import java.awt.event.ContainerAdapter;
 import java.awt.event.ContainerEvent;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
 
 public class DetallePersonaje extends JInternalFrame {
-	private JTextField textField_nombre;
-	private JTextField textField_alineamiento;
+	
 	private Personaje pj;
 	private JList<Hechizo> listConocidos;
 	private JList<Hechizo> listPreparados;
 	private DefaultListModel<Hechizo> conjConocidos;
 	private DefaultListModel<Hechizo> conjPreparados; //static para poder cerrarlo al lanzar el hechizo desde DetalleHchizo
+	private int indicePj;
+
+	private JTextField textField_nombre;
+	private JTextField textField_alineamiento;
 	private JLabel lblDiarios0;
 	private JLabel lblDiarios1;
 	private JLabel lblDiarios2;
@@ -65,12 +70,6 @@ public class DetallePersonaje extends JInternalFrame {
 	private SpinnerModel spinnerModelInt;
 	private SpinnerModel spinnerModelSab;
 	private SpinnerModel spinnerModelCar;
-	private SpinnerModel spinnerModelFueMod;
-	private SpinnerModel spinnerModelDesMod;
-	private SpinnerModel spinnerModelConMod;
-	private SpinnerModel spinnerModelIntMod;
-	private SpinnerModel spinnerModelSabMod;
-	private SpinnerModel spinnerModelCarMod;
 	private SpinnerModel spinnerModelNivel;
 	private SpinnerModel spinnerModelCa;
 	private SpinnerModel spinnerModelPg;
@@ -91,8 +90,8 @@ public class DetallePersonaje extends JInternalFrame {
 	private JLabel lblModCar;
 	private JLabel lblModFue;
 	private JLabel lblModDes;
-	private JComboBox comboBox_clase;
-	private JComboBox comboBox_raza;
+	private JComboBox<Clase> comboBox_clase;
+	private JComboBox<Raza> comboBox_raza;
 	private JButton btnRestaurar;
 	private JButton btnAgregarConj;
 	private JButton btnEliminarConj;
@@ -133,12 +132,13 @@ public class DetallePersonaje extends JInternalFrame {
 	private JLabel label_20;
 	private JButton btnVerConj;
 	private JLabel lblNombre;
-	private int indicePj;
+	private JButton btnRefrescar;
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public DetallePersonaje(Personaje personaje, int indicePj) {
+	public DetallePersonaje(Personaje personaje, final int indicePj) {
 				
 		this.indicePj=indicePj;
 		this.pj=personaje;
@@ -149,6 +149,8 @@ public class DetallePersonaje extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		generarPanels();
+
+		generarSpinnerModels();
 		
 		generarSpinners();
 		
@@ -164,7 +166,126 @@ public class DetallePersonaje extends JInternalFrame {
 		
 		generarLabels();
 		
+		generarLabelsDiarios();
+		
 		generarListeners();
+		
+		//Guardar el personaje
+
+				btnGuardarPj.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						
+						//Valida los valores de los componentes gráficos
+						
+						//Crea nuevo personaje con los valores de los componentes gráficos
+						Personaje pjModificado = new Personaje(
+								textField_nombre.getText(),
+								(Raza) comboBox_raza.getSelectedItem(),
+								(Clase) comboBox_clase.getSelectedItem(),
+								(int) spNivel.getValue(),
+								textField_alineamiento.getText(),
+								(int) spFue.getValue(),
+								(int) spDes.getValue(),
+								(int) spCon.getValue(),
+								(int) spInt.getValue(),
+								(int) spSab.getValue(),
+								(int) spCar.getValue(),
+								(int) spCa.getValue(),
+								(int) spPg.getValue(),
+								(int) spAtaqueBase.getValue() );
+						
+						//Extrae los conj. preparados de la interfaz y los pasa al personaje
+						ArrayList<Hechizo> preparados = new ArrayList<Hechizo>();
+						Hechizo aux;
+						for (int i = 0; i < conjPreparados.getSize(); i++) {
+							aux=conjPreparados.get(i);
+							preparados.add(aux);
+						}
+						pjModificado.setConjurosPreparados(preparados);
+						
+						//Define los conj.diarios del nuevo personaje en base a los del anterior:
+						pjModificado.setConjurosDiarios(pj.getConjurosDiarios());
+						
+						
+						//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
+						if (Principal.añadirPj(pjModificado)) {
+							Principal.eliminarPj(indicePj);
+							dispose();
+						}
+						
+					}
+				});
+		
+	}
+	
+	public DetallePersonaje() {
+		setTitle("Nuevo personaje");
+		setIconifiable(true);
+		setClosable(true);
+		setBounds(100, 100, 853, 419);
+		getContentPane().setLayout(null);
+		
+		this.pj=new Personaje("", null, null, 1, "", 10, 10, 10, 10, 10, 10, 10, 1, 1);
+		
+		generarPanels();
+		
+		generarSpinnerModels();
+		
+		generarSpinners();
+		
+		generarLabelsMod();
+		
+		generarCombos();
+		
+		generarTextFieldsPjNuevo();
+		
+		generarLists();
+		
+		generarButtons();
+		
+		generarLabels();
+		
+		generarLabelsDiarios();
+		
+		generarListeners();
+		
+		modificarVisibilidad();
+		
+		//La forma de guardar cambia entre ambos constructores
+		btnGuardarPj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//Valida los valores de los componentes gráficos
+				
+				//Crea nuevo personaje con los valores de los componentes gráficos
+				Personaje pjModificado = new Personaje(
+						textField_nombre.getText(),
+						(Raza) comboBox_raza.getSelectedItem(),
+						(Clase) comboBox_clase.getSelectedItem(),
+						(int) spNivel.getValue(),
+						textField_alineamiento.getText(),
+						(int) spFue.getValue(),
+						(int) spDes.getValue(),
+						(int) spCon.getValue(),
+						(int) spInt.getValue(),
+						(int) spSab.getValue(),
+						(int) spCar.getValue(),
+						(int) spCa.getValue(),
+						(int) spPg.getValue(),
+						(int) spAtaqueBase.getValue() );
+						
+				//Define los conj.diarios del nuevo personaje
+				pjModificado.setConjurosDiarios();
+				
+				
+				//Introduce el personaje creado en el arraylist de personajes
+				if (Principal.añadirPj(pjModificado)) {
+					dispose();
+				}
+				
+			}
+		});
+		
 		
 	}
 
@@ -204,7 +325,11 @@ public class DetallePersonaje extends JInternalFrame {
 		//Eventos al modificar una caracteristica en el Splitter (uno para cada caracteristica!)
 		spInt.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent arg0) {
-				lblModInt.setText(String.valueOf(pj.calcularModificador((int)spInt.getValue())));
+				//lblModInt.setText(String.valueOf(pj.calcularModificador((int)spInt.getValue())));
+				int valorSpinner=(int) spInt.getValue();
+				int mod = pj.calcularModificador(valorSpinner);
+				String cadena = String.valueOf(mod);
+				lblModInt.setText(cadena);
 			}
 		});
 		
@@ -292,33 +417,14 @@ public class DetallePersonaje extends JInternalFrame {
 			}
 		});
 		
-		//Modificar - activar todos los elementos que puedna ser editables por el usuario
+		//Modificar - activar todos los elementos que puedan ser editables por el usuario
 		
 		btnModificar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				textField_nombre.setEditable(true);
-				textField_alineamiento.setEditable(true);
-				
-				comboBox_clase.setEnabled(true);
-				comboBox_raza.setEnabled(true);
-				
-				spCa.setEnabled(true);
-				spPg.setEnabled(true);
-				spNivel.setEnabled(true);
-				spAtaqueBase.setEnabled(true);
-				
-				spFue.setEnabled(true);
-				spDes.setEnabled(true);
-				spCon.setEnabled(true);
-				spSab.setEnabled(true);
-				spInt.setEnabled(true);
-				spCar.setEnabled(true);
-				
-				btnAgregarConj.setEnabled(true);
-				btnEliminarConj.setEnabled(true);
-				btnGuardarPj.setEnabled(true);
+				modificarVisibilidad();
 			}
+
+			
 		});
 		
 		//Ver el hechizo selecionado
@@ -343,60 +449,49 @@ public class DetallePersonaje extends JInternalFrame {
 			}
 		});
 		
-		//Guardar el personaje
-
-		btnGuardarPj.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				
-				//Valida los valores de los componentes gráficos
-				
-				//Crea nuevo personaje con los valores de los componentes gráficos
-				Personaje pjModificado = new Personaje(
-						textField_nombre.getText(),
-						(Raza) comboBox_raza.getSelectedItem(),
-						(Clase) comboBox_clase.getSelectedItem(),
-						(int) spNivel.getValue(),
-						textField_alineamiento.getText(),
-						(int) spFue.getValue(),
-						(int) spDes.getValue(),
-						(int) spCon.getValue(),
-						(int) spInt.getValue(),
-						(int) spSab.getValue(),
-						(int) spCar.getValue(),
-						(int) spCa.getValue(),
-						(int) spPg.getValue(),
-						(int) spAtaqueBase.getValue() );
-				
-				//Extrae los conj. preparados de la interfaz y los pasa al personaje
-				ArrayList<Hechizo> preparados = new ArrayList<Hechizo>();
-				Hechizo aux;
-				for (int i = 0; i < conjPreparados.getSize(); i++) {
-					aux=conjPreparados.get(i);
-					preparados.add(aux);
-				}
-				pjModificado.setConjurosPreparados(preparados);
-				
-				//Define los conj.diarios del nuevo personaje ne base a los del anterior:
-				pjModificado.setConjurosDiarios(pj.getConjurosDiarios());
-				
-				//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
-				if (Principal.añadirPj(pjModificado)) {
-					Principal.eliminarPj(indicePj);
-					dispose();
-				}
-				
-			}
-		});
+		
 		
 		//Refrescos cada vez que se lanza un hechizo (no encuentro otro evento que sea más efectivo que este)
 		
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameActivated(InternalFrameEvent e) {
-				generarConjPreparados();//Refresca la lista cada vez que se lanza un hechizo
-				generarSpinners();//Refresca los spinners
+					generarConjPreparados();//Refresca la lista cada vez que se lanza un hechizo
 			}
 		});
+		
+		btnRefrescar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				generarSpinnerModels();//Refresca los spinnerModel
+				asignarSpinnerModels();//Recarga los models en sus respectivos spinners
+			}
+		});
+		
+		
+	}
+	
+	private void modificarVisibilidad() {
+		textField_nombre.setEditable(true);
+		textField_alineamiento.setEditable(true);
+		
+		comboBox_clase.setEnabled(true);
+		comboBox_raza.setEnabled(true);
+		
+		spCa.setEnabled(true);
+		spPg.setEnabled(true);
+		spNivel.setEnabled(true);
+		spAtaqueBase.setEnabled(true);
+		
+		spFue.setEnabled(true);
+		spDes.setEnabled(true);
+		spCon.setEnabled(true);
+		spSab.setEnabled(true);
+		spInt.setEnabled(true);
+		spCar.setEnabled(true);
+		
+		btnAgregarConj.setEnabled(true);
+		btnEliminarConj.setEnabled(true);
+		btnGuardarPj.setEnabled(true);
 	}
 
 	private void generarLabels() {
@@ -545,7 +640,9 @@ public class DetallePersonaje extends JInternalFrame {
 		label_20 = new JLabel("9");
 		label_20.setBounds(331, 22, 12, 16);
 		panel_Conjuros.add(label_20);
-		
+	}
+
+	private void generarLabelsDiarios() {
 		lblDiarios0 = new JLabel(String.valueOf(pj.getConjurosDiarios()[0]));
 		lblDiarios0.setBounds(115, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios0);
@@ -617,6 +714,10 @@ public class DetallePersonaje extends JInternalFrame {
 		btnVerConj = new JButton("Lanzar conjuro");
 		btnVerConj.setBounds(239, 308, 150, 20);
 		panel_Conjuros.add(btnVerConj);
+		
+		btnRefrescar = new JButton("Refrescar");
+		btnRefrescar.setBounds(12, 348, 126, 26);
+		getContentPane().add(btnRefrescar);
 	}
 
 	private void generarLists() {
@@ -647,6 +748,21 @@ public class DetallePersonaje extends JInternalFrame {
 		textField_nombre.setColumns(10);
 		
 		textField_alineamiento = new JTextField(pj.getAlineamiento());
+		textField_alineamiento.setEditable(false);
+		textField_alineamiento.setBounds(96, 83, 127, 20);
+		panel_infoBasica.add(textField_alineamiento);
+		textField_alineamiento.setColumns(10);
+	}
+	
+	private void generarTextFieldsPjNuevo() {
+		
+		textField_nombre = new JTextField("");
+		textField_nombre.setEditable(false);
+		textField_nombre.setBounds(70, 27, 153, 20);
+		panel_infoBasica.add(textField_nombre);
+		textField_nombre.setColumns(10);
+		
+		textField_alineamiento = new JTextField("");
 		textField_alineamiento.setEditable(false);
 		textField_alineamiento.setBounds(96, 83, 127, 20);
 		panel_infoBasica.add(textField_alineamiento);
@@ -700,25 +816,6 @@ public class DetallePersonaje extends JInternalFrame {
 	}
 
 	private void generarSpinners() {
-		
-		spinnerModelFue = new SpinnerNumberModel(pj.getFuerza(), 1, 29, 1);
-		spinnerModelDes = new SpinnerNumberModel(pj.getDestreza(), 1, 29, 1);
-		spinnerModelCon = new SpinnerNumberModel(pj.getConstitucion(), 1, 29, 1);
-		spinnerModelInt = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
-		spinnerModelSab = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
-		spinnerModelCar = new SpinnerNumberModel(pj.getCarisma(), 1, 29, 1);
-		
-		spinnerModelFueMod = new SpinnerNumberModel(pj.getModFue(), -5, 8, 1);
-		spinnerModelDesMod = new SpinnerNumberModel(pj.getModDes(), -5, 8, 1);
-		spinnerModelConMod = new SpinnerNumberModel(pj.getModCon(), -5, 8, 1);
-		spinnerModelIntMod = new SpinnerNumberModel(pj.getModInt(), -5, 8, 1);
-		spinnerModelSabMod = new SpinnerNumberModel(pj.getModSab(), -5, 8, 1);
-		spinnerModelCarMod = new SpinnerNumberModel(pj.getModCar(), -5, 8, 1);
-		
-		spinnerModelNivel = new SpinnerNumberModel(pj.getNivel(), 1, 20, 1);
-		spinnerModelCa = new SpinnerNumberModel(pj.getCa(), 0, 40, 1);
-		spinnerModelPg = new SpinnerNumberModel(pj.getPg(), -10, 999, 1);
-		spinnerModelAtaque = new SpinnerNumberModel(pj.getAtaqueBase(), 1, 20, 1);
 
 		spFue = new JSpinner(spinnerModelFue);
 		spFue.setEnabled(false);
@@ -769,6 +866,35 @@ public class DetallePersonaje extends JInternalFrame {
 		spAtaqueBase.setEnabled(false);
 		spAtaqueBase.setBounds(352, 83, 35, 20);
 		panel_infoBasica.add(spAtaqueBase);
+		
+	}
+
+	private void asignarSpinnerModels() {
+		//asignar spinners 
+		spFue.setModel(spinnerModelFue);
+		spDes.setModel(spinnerModelDes);
+		spCon.setModel(spinnerModelCon);
+		spInt.setModel(spinnerModelInt);
+		spSab.setModel(spinnerModelSab);
+		spCar.setModel(spinnerModelCar);
+		
+		spNivel.setModel(spinnerModelNivel);
+		spCa.setModel(spinnerModelCa);
+		spPg.setModel(spinnerModelPg);
+		spAtaqueBase.setModel(spinnerModelAtaque);
+	}
+
+	private void generarSpinnerModels() {
+		spinnerModelFue = new SpinnerNumberModel(pj.getFuerza(), 1, 29, 1);
+		spinnerModelDes = new SpinnerNumberModel(pj.getDestreza(), 1, 29, 1);
+		spinnerModelCon = new SpinnerNumberModel(pj.getConstitucion(), 1, 29, 1);
+		spinnerModelInt = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
+		spinnerModelSab = new SpinnerNumberModel(pj.getInteligencia(), 1, 29, 1);
+		spinnerModelCar = new SpinnerNumberModel(pj.getCarisma(), 1, 29, 1);
+		spinnerModelNivel = new SpinnerNumberModel(pj.getNivel(), 1, 20, 1);
+		spinnerModelCa = new SpinnerNumberModel(pj.getCa(), 0, 40, 1);
+		spinnerModelPg = new SpinnerNumberModel(pj.getPg(), -10, 999, 1);
+		spinnerModelAtaque = new SpinnerNumberModel(pj.getAtaqueBase(), 1, 20, 1);
 	}
 
 	private void generarPanels() {

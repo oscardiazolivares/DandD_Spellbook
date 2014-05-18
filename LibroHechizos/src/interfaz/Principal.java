@@ -162,11 +162,11 @@ public class Principal extends JFrame {
 		panel.add(btnAadir);
 		
 		JButton btnMostrar = new JButton("Mostrar");
-		btnMostrar.setBounds(127, 502, 98, 26);
+		btnMostrar.setBounds(127, 502, 98, 68);
 		panel.add(btnMostrar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(127, 544, 98, 26);
+		btnEliminar.setBounds(12, 544, 98, 26);
 		panel.add(btnEliminar);
 		
 		//Mostrar pj
@@ -181,6 +181,19 @@ public class Principal extends JFrame {
 				} catch (java.beans.PropertyVetoException e1) {
 				}
 			}
+		});
+		
+		//Nuevo
+		btnAadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				DetallePersonaje detallePj = new DetallePersonaje();
+				detallePj.setVisible(true);
+				desktopPane.add(detallePj);
+			try {
+				detallePj.setSelected(true);
+			} catch (java.beans.PropertyVetoException e1) {
+			}
+	}
 		});
 		
 		//Guardar como...

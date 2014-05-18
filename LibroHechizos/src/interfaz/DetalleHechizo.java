@@ -173,6 +173,7 @@ public class DetalleHechizo extends JInternalFrame {
 				}
 				try {
 					LanzamientoHechizo dialog = new LanzamientoHechizo(((Mostrable)hechizo).mostrarResolucion());
+					//Control de tipos de hechizo
 					if (hechizo instanceof Bonificante) {
 						((Bonificante) hechizo).bonificarPersonaje(Principal.personajes.get(indicePj));
 					}
@@ -182,11 +183,12 @@ public class DetalleHechizo extends JInternalFrame {
 					e.printStackTrace();
 				}
 				//Elimina el conj. preparado del pj
-				Personaje nor = Principal.personajes.get(indicePj);
-				ArrayList<Hechizo> preparados = nor.getConjurosPreparados();
-				preparados.remove(indiceHechizo);
-				Principal.personajes.get(indicePj).setConjurosPreparados(preparados);
-				preparados = nor.getConjurosPreparados();
+//				Personaje nor = Principal.personajes.get(indicePj);
+//				ArrayList<Hechizo> preparados = nor.getConjurosPreparados();
+//				preparados.remove(indiceHechizo);
+//				Principal.personajes.get(indicePj).setConjurosPreparados(preparados);
+//				preparados = nor.getConjurosPreparados();
+				Principal.personajes.get(indicePj).getConjurosPreparados().remove(indiceHechizo);
 				
 				//Cierra la ventana del hechizo
 				dispose();
