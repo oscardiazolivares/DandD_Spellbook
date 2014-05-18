@@ -13,7 +13,11 @@ import java.awt.Dialog.ModalityType;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
-
+/**
+ * Ventana simple para mostrar un error genérico.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class Error extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

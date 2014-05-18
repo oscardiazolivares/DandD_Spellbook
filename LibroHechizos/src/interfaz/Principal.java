@@ -281,14 +281,18 @@ public class Principal extends JFrame {
 		
 		abrirFicheroInicial();
 	}
-	
+	/**
+	 * Abre el fichero de personajes de prueba.
+	 */
 	private void abrirFicheroInicial() {
 		fichero = new Fichero("saves//personajesPrueba");
 		personajes = fichero.leerFichero();
 		modelPersonajes.clear(); //Borra el listModel
 		cargarListModel();
 	}
-	
+	/**
+	 * Carga los personajes del ArrayList constante en el JList de la interfaz.
+	 */
 	private void cargarListModel() {
 		Personaje personajeAux;
 		for (Iterator<Personaje> iterator = personajes.iterator(); iterator.hasNext();) {
@@ -299,6 +303,11 @@ public class Principal extends JFrame {
 		listPersonajes.setModel(modelPersonajes);
 	}
 	
+	/**
+	 * Añade un personaje al ArrayList y recarga la lista de la interfaz.
+	 * @param pjNuevo
+	 * @return true si se ha añadido satisfactoriamente. False en otro caso.
+	 */
 	static boolean añadirPj(Personaje pjNuevo) {
 		
 		if (personajes.add(pjNuevo)) {
@@ -308,7 +317,11 @@ public class Principal extends JFrame {
 		}
 		return false;		
 	}
-	
+	/**
+	 * Elimina un personaje del ArrayList y recarga la lista de la interfaz.
+	 * @param indice
+	 * @return true si se eliminado correctamente. En otro caso, false.
+	 */
 	static boolean eliminarPj(int indice) {
 		
 		if (personajes.remove(indice)!=null) {

@@ -13,7 +13,11 @@ import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Dialog.ModalExclusionType;
-
+/**
+ * Clase de la interfaz que muestra en detalle un hechizo a lanzar potencialmente por un personaje concreto.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class LanzamientoHechizo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

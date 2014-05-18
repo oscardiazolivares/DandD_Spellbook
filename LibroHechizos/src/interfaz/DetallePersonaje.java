@@ -43,6 +43,13 @@ import javax.swing.event.InternalFrameEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
+/**
+ * Interfaz que muestra el personaje en detalle, así como sus hechizos preparados. Permite modificar un personaje o bien
+ * crear uno nuevo.
+ * 
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class DetallePersonaje extends JInternalFrame {
 	
 	private Personaje pj;
@@ -321,7 +328,9 @@ public class DetallePersonaje extends JInternalFrame {
 		//Desactivamos la parte de hechizos cuando creamos un nuevo pj, ya que necesita su nivel para poder añadir hechizos.
 		panel_Conjuros.setVisible(false);
 	}
-
+	/**
+ 	* Actualiza los labels que representan los conj. diarios que quedan por gastar.
+ 	*/
 	private void actualizarLabelConjDiario() {
 		lblDiarios0.setText(String.valueOf(pj.getConjurosDiarios()[0]));
 		lblDiarios1.setText(String.valueOf(pj.getConjurosDiarios()[1]));
@@ -334,7 +343,10 @@ public class DetallePersonaje extends JInternalFrame {
 		lblDiarios8.setText(String.valueOf(pj.getConjurosDiarios()[8]));
 		lblDiarios9.setText(String.valueOf(pj.getConjurosDiarios()[9]));				
 	}
-	
+	/**
+	 * Carga el listModel de conjuros conocidos con los datos del ArrayList constante de la clase Principal.
+	 * @see Principal
+	 */
 	private void generarConjConocidos() {
 		for (Iterator iterator = Principal.hechizos.iterator(); iterator.hasNext();) {
 			Hechizo hechizo = (Hechizo) iterator.next();
@@ -342,7 +354,9 @@ public class DetallePersonaje extends JInternalFrame {
 		}
 		
 	}
-	
+	/**
+	 * Limpia y carga los conjuros preparados de un personaje en el listModel correspondiente.S
+	 */
 	private void generarConjPreparados() {
 		if (pj.getConjurosPreparados()!=null) {
 			conjPreparados.removeAllElements();
@@ -353,7 +367,9 @@ public class DetallePersonaje extends JInternalFrame {
 		}
 		
 	}
-	
+	/**
+	 * Genera los listeners necesarios para controlar todas las funciones.
+	 */
 	private void generarListeners() {
 		//Eventos al modificar una caracteristica en el Splitter (uno para cada caracteristica!)
 		spInt.addChangeListener(new ChangeListener() {
@@ -502,7 +518,9 @@ public class DetallePersonaje extends JInternalFrame {
 		
 		
 	}
-	
+	/**
+	 * Modifica la visibilidad y 'editabilidad' de los elementos para habilitar la modificación.
+	 */
 	private void modificarVisibilidad() {
 		textField_nombre.setEditable(true);
 		textField_alineamiento.setEditable(true);
@@ -526,7 +544,9 @@ public class DetallePersonaje extends JInternalFrame {
 		btnEliminarConj.setEnabled(true);
 		btnGuardarPj.setEnabled(true);
 	}
-
+	/**
+	 * Genera los elementos label de la interfaz.
+	 */
 	private void generarLabels() {
 		lblFue = new JLabel("FUE");
 		lblFue.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -674,7 +694,9 @@ public class DetallePersonaje extends JInternalFrame {
 		label_20.setBounds(331, 22, 12, 16);
 		panel_Conjuros.add(label_20);
 	}
-
+	/**
+	 * Genera los labels de los conjuros diarios.
+	 */
 	private void generarLabelsDiarios() {
 		lblDiarios0 = new JLabel(String.valueOf(pj.getConjurosDiarios()[0]));
 		lblDiarios0.setBounds(115, 36, 12, 16);
@@ -716,7 +738,9 @@ public class DetallePersonaje extends JInternalFrame {
 		lblDiarios9.setBounds(331, 36, 12, 16);
 		panel_Conjuros.add(lblDiarios9);
 	}
-
+	/**
+	 * Genera los botos de la interfaz.
+	 */
 	private void generarButtons() {
 		
 		btnRestaurar = new JButton("Restaurar diarios");
@@ -752,7 +776,9 @@ public class DetallePersonaje extends JInternalFrame {
 		btnRefrescar.setBounds(12, 348, 126, 26);
 		getContentPane().add(btnRefrescar);
 	}
-
+	/**
+	 * Genera y rellena los listModels y los JList de la interfaz.
+	 */
 	private void generarLists() {
 		//LIstmodels
 		
@@ -771,7 +797,9 @@ public class DetallePersonaje extends JInternalFrame {
 		listPreparados.setBounds(236, 75, 153, 221);
 		panel_Conjuros.add(listPreparados);
 	}
-
+	/**
+	 * Crea y carga los textFields de la interfaz.
+	 */
 	private void generarTextFields() {
 		
 		textField_nombre = new JTextField(pj.getNombre());
@@ -786,7 +814,9 @@ public class DetallePersonaje extends JInternalFrame {
 		panel_infoBasica.add(textField_alineamiento);
 		textField_alineamiento.setColumns(10);
 	}
-	
+	/**
+	 * Crea los textFields necesarios para un personaje nuevo.
+	 */
 	private void generarTextFieldsPjNuevo() {
 		
 		textField_nombre = new JTextField("");
@@ -801,7 +831,9 @@ public class DetallePersonaje extends JInternalFrame {
 		panel_infoBasica.add(textField_alineamiento);
 		textField_alineamiento.setColumns(10);
 	}
-
+	/**
+	 * Genera los combobox de la interfaz.
+	 */
 	private void generarCombos() {
 		
 		comboBox_clase = new JComboBox(Clase.values());
@@ -814,7 +846,9 @@ public class DetallePersonaje extends JInternalFrame {
 		comboBox_raza.setBounds(274, 25, 121, 25);
 		panel_infoBasica.add(comboBox_raza);
 	}
-
+	/**
+	 * Genera los labels de los modificadores de características.
+	 */
 	private void generarLabelsMod() {
 		
 		lblModInt = new JLabel(String.valueOf(pj.getModInt()));
@@ -847,7 +881,9 @@ public class DetallePersonaje extends JInternalFrame {
 		lblModDes.setBounds(90, 72, 35, 16);
 		panel_Caracteristicas.add(lblModDes);
 	}
-
+	/**
+	 * Genera y carga los spinners de la interfaz.
+	 */
 	private void generarSpinners() {
 
 		spFue = new JSpinner(spinnerModelFue);
@@ -901,7 +937,9 @@ public class DetallePersonaje extends JInternalFrame {
 		panel_infoBasica.add(spAtaqueBase);
 		
 	}
-
+	/**
+	 * Asigna los modelos a sus spinner correspondientes, recargando así los spinner.
+	 */
 	private void asignarSpinnerModels() {
 		//asignar spinners 
 		spFue.setModel(spinnerModelFue);
@@ -916,7 +954,9 @@ public class DetallePersonaje extends JInternalFrame {
 		spPg.setModel(spinnerModelPg);
 		spAtaqueBase.setModel(spinnerModelAtaque);
 	}
-
+	/**
+	 * Genera los spinnerModel con los atributos del personaje.
+	 */
 	private void generarSpinnerModels() {
 		spinnerModelFue = new SpinnerNumberModel(pj.getFuerza(), 1, 29, 1);
 		spinnerModelDes = new SpinnerNumberModel(pj.getDestreza(), 1, 29, 1);
@@ -929,7 +969,9 @@ public class DetallePersonaje extends JInternalFrame {
 		spinnerModelPg = new SpinnerNumberModel(pj.getPg(), -10, 999, 1);
 		spinnerModelAtaque = new SpinnerNumberModel(pj.getAtaqueBase(), 1, 20, 1);
 	}
-
+	/**
+	 * Genera los panels necesarios.
+	 */
 	private void generarPanels() {
 		
 		panel_Caracteristicas = new JPanel();
