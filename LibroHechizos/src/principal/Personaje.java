@@ -461,7 +461,7 @@ public class Personaje implements Serializable{
 	 * @param niveles
 	 *            the niveles to set
 	 */
-	private void setNivel(int nivel) {
+	protected void setNivel(int nivel) {
 		this.nivel = nivel;
 		setConjurosDiarios();
 	}
@@ -478,7 +478,7 @@ public class Personaje implements Serializable{
 	 * @param fuerza
 	 *            the fuerza to set
 	 */
-	private void setFuerza(int fuerza) {
+	protected void setFuerza(int fuerza) {
 		this.fuerza = fuerza;
 	}
 
@@ -486,7 +486,7 @@ public class Personaje implements Serializable{
 	 * @param destreza
 	 *            the destreza to set
 	 */
-	private void setDestreza(int destreza) {
+	protected void setDestreza(int destreza) {
 		this.destreza = destreza;
 	}
 
@@ -494,7 +494,7 @@ public class Personaje implements Serializable{
 	 * @param constitucion
 	 *            the constitucion to set
 	 */
-	private void setConstitucion(int constitucion) {
+	protected void setConstitucion(int constitucion) {
 		this.constitucion = constitucion;
 	}
 
@@ -502,7 +502,7 @@ public class Personaje implements Serializable{
 	 * @param inteligencia
 	 *            the inteligencia to set
 	 */
-	private void setInteligencia(int inteligencia) {
+	protected void setInteligencia(int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
 
@@ -510,7 +510,7 @@ public class Personaje implements Serializable{
 	 * @param sabiduria
 	 *            the sabiduria to set
 	 */
-	private void setSabiduria(int sabiduria) {
+	protected void setSabiduria(int sabiduria) {
 		this.sabiduria = sabiduria;
 	}
 
@@ -518,7 +518,7 @@ public class Personaje implements Serializable{
 	 * @param carisma
 	 *            the carisma to set
 	 */
-	private void setCarisma(int carisma) {
+	protected void setCarisma(int carisma) {
 		this.carisma = carisma;
 	}
 
@@ -574,7 +574,7 @@ public class Personaje implements Serializable{
 	 * @param ca
 	 *            the ca to set
 	 */
-	private void setCa(int ca) {
+	protected void setCa(int ca) {
 		this.ca = ca;
 	}
 
@@ -582,7 +582,7 @@ public class Personaje implements Serializable{
 	 * @param pg
 	 *            the pg to set
 	 */
-	private void setPg(int pg) {
+	protected void setPg(int pg) {
 		this.pg = pg;
 	}
 
@@ -590,7 +590,7 @@ public class Personaje implements Serializable{
 	 * @param ataqueBase
 	 *            the ataqueBase to set
 	 */
-	private void setAtaqueBase(int ataqueBase) {
+	protected void setAtaqueBase(int ataqueBase) {
 		this.ataqueBase = ataqueBase;
 	}
 

@@ -388,12 +388,13 @@ public class DetallePersonaje extends JInternalFrame {
 			}
 		});
 		
-		//Refresca la lista cada vez que se lanza un hechizo (no encuentro otro evento que sea más efectivo que este)
+		//Refrescos cada vez que se lanza un hechizo (no encuentro otro evento que sea más efectivo que este)
 		
 		addInternalFrameListener(new InternalFrameAdapter() {
 			@Override
 			public void internalFrameActivated(InternalFrameEvent e) {
-				generarConjPreparados();
+				generarConjPreparados();//Refresca la lista cada vez que se lanza un hechizo
+				generarSpinners();//Refresca los spinners
 			}
 		});
 	}

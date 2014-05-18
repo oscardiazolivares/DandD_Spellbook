@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
+import principal.Bonificante;
 import principal.Hechizo;
 import principal.Mostrable;
 import principal.Personaje;
@@ -171,7 +172,10 @@ public class DetalleHechizo extends JInternalFrame {
 					e.printStackTrace();
 				}
 				try {
-					LanzamientoHechizo dialog = new LanzamientoHechizo(((Mostrable)hechizo).mostrarResolucion()); //¿Que mensaje se le pasa? Tiene que valer para todos¿? ¿Donde se genera?
+					LanzamientoHechizo dialog = new LanzamientoHechizo(((Mostrable)hechizo).mostrarResolucion());
+					if (hechizo instanceof Bonificante) {
+						((Bonificante) hechizo).bonificarPersonaje(Principal.personajes.get(indicePj));
+					}
 					dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					dialog.setVisible(true);
 				} catch (Exception e) {

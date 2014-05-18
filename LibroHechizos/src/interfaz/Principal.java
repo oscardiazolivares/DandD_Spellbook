@@ -22,11 +22,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import javax.swing.UIManager;
 
+import principal.ArmaduraDeMago;
 import principal.BolaDeFuego;
 import principal.Clase;
 import principal.Fichero;
 import principal.Hechizo;
 import principal.Personaje;
+import principal.RayoDeDebilitamiento;
 import principal.Raza;
 
 import javax.swing.border.TitledBorder;
@@ -96,10 +98,12 @@ public class Principal extends JFrame {
 		setBounds(2, 50, 1000, 700);
 		
 		//Carga el nuevo personaje en el arraylist
-		//personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
+		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
 		
 		//Carga los hechizos existentes
 		hechizos.add(new BolaDeFuego());
+		hechizos.add(new RayoDeDebilitamiento());
+		hechizos.add(new ArmaduraDeMago());
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

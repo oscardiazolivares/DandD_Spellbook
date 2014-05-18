@@ -10,7 +10,8 @@ public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable, Alcance
 				Descriptor.FUEGO,
 				(short) 3,
 				new Componente[] { Componente.VERBAL, Componente.SOMATICO, Componente.MATERIAL },
-				"Un conjuro de Bola de fuego es una explosión de llamas que detona con un estampido grave e inflige 1d6 puntos de daño por nivel de lanzador (máximo 10d6)",
+				"Un conjuro de Bola de fuego es una explosión de llamas que detona con un estampido grave e inflige 1d6 puntos de daño por "
+				+ "nivel de lanzador (máximo 10d6)",
 				TiempoLanzamiento.ESTANDAR, "Instantánea", "Reflejos mitad");
 		//super.alcance.alcanceLargo(nivelLanzador);
 	}

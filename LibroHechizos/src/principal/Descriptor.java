@@ -19,7 +19,8 @@ public enum Descriptor {
 	MUERTE ("Muerte"),
 	OSCURIDAD ("Oscuridad"),
 	SONICO ("Sónico"),
-	TIERRA ("Tierra");
+	TIERRA ("Tierra"),
+	NINGUNO ("");
 	
 	private String nombre;
 	
