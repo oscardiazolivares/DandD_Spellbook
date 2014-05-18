@@ -35,6 +35,7 @@ import principal.RayoDeDebilitamiento;
 import principal.Raza;
 import principal.ResistenciaDeOso;
 import principal.ToqueVampirico;
+import principal.VisionEnLaOscuridad;
 
 import javax.swing.border.TitledBorder;
 import javax.swing.JList;
@@ -112,6 +113,7 @@ public class Principal extends JFrame {
 		hechizos.add(new ResistenciaDeOso());
 		hechizos.add(new Escudo());
 		hechizos.add(new ToqueVampirico());
+		hechizos.add(new VisionEnLaOscuridad());
 		
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
