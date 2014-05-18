@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Clase básica de la que heredan los hechizos concretos. No se instancia.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class Hechizo implements AlcanceDefinible{
 
 	/**

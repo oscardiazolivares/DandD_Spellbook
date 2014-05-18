@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Clase que representa una tirada de dados resoluble. Puede contener también un bonificador fijo o variable.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class Tirada {
 	/**
 	 * Matriz que representa cuantos dados y de que tipo hay que lanzar.
@@ -30,18 +35,6 @@ public class Tirada {
 		for (int i = 0; i < dados.length; i++) {
 			resultado+=tirarDados(dados[i]);
 		}
-		
-//		if (dados.length == 2) { // Si la dimensión de las filas es diferente de 2, no es una matriz válida.
-//			int aux=0;
-//			for (int i = 0; i < dados.length; i++) { // ejemplo -> dados.length=3
-//				for (int j = 0; j <dados[0][i]; j++) { // ejemplo -> dados[0][i]= 2, 2 y 1
-//					resultado += (int)((Math.random()*dados[1][i]));
-//				}
-//			}
-//			resultado += bonificador;
-//		} else {
-//			resultado = -1;
-//		}
 		return resultado;
 	}
 	

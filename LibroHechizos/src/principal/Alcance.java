@@ -1,7 +1,19 @@
 package principal;
 
+/**
+ * Clase estática que define el cálculo del alcance de un hechizo dado su nivel de lanzador y su tipo de alcance
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public final class Alcance {
 
+	/**
+	 * Calcula un alcance en pies (int) dado un tipo de alcance y un nivel de lanzador (int)
+	 * @see TipoAlcance
+	 * @param tipoAlcance
+	 * @param nivel
+	 * @return alcance en pies
+	 */
 	public static int calcularAlcance (AlcanceEnum tipoAlcance, int nivel) {
 		
 		switch (tipoAlcance) {

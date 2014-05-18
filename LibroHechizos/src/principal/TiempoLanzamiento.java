@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Enumración de los distintos tiempos de lanzamiento que puede tener un hechizo.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public enum TiempoLanzamiento {
 	ASALTO ("Asalto completo"),
 	ESTANDAR ("Acción estándar"),

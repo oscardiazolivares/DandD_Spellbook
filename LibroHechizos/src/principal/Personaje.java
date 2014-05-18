@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Clase que representa un personaje básico lanzador de conjuros e Dungeons & Dragons 3.5
+ * Clase que representa un personaje básico lanzador de conjuros de Dungeons & Dragons 3.5
  * 
  * @author Óscar Díaz Olivares
  * @version 1.0

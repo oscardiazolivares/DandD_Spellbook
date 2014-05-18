@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Hechizo "Resistencia de oso".
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class ResistenciaDeOso extends Hechizo implements Bonificante, Mostrable, AlcanceDefinible {
 
 	/**

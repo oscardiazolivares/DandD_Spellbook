@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Hechizo Bola de fuego.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class BolaDeFuego extends Hechizo implements Hiriente, Mostrable, AlcanceDefinible{
 
 	public BolaDeFuego() {

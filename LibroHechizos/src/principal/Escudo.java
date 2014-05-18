@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Conjuro "Escudo"
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class Escudo extends Hechizo implements AlcanceDefinible, Mostrable, Bonificante {
 
 	public Escudo() {

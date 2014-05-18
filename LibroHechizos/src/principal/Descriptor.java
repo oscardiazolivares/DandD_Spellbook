@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Un descriptor es una asociación por similitud de algunos hechizos.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public enum Descriptor {
 	ACIDO ("Ácido"),
 	AGUA ("Agua"),

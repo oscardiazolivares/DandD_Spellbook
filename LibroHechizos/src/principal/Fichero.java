@@ -10,6 +10,11 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Realiza las operaciones necesarias de entrada y salida para poder guardar y recuperar personajes desde un archivo.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class Fichero {
 
 	private String ruta;

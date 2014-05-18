@@ -41,7 +41,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JList;
 
 /**
- * Ventana principal de la interfaz gráfica
+ * Ventana principal de la interfaz gráfica.
  * @author Óscar Díaz Olivares
  */
 public class Principal extends JFrame {
@@ -280,7 +280,7 @@ public class Principal extends JFrame {
 		
 		
 	}
-
+	
 	private void cargarListModel() {
 		Personaje personajeAux;
 		for (Iterator<Personaje> iterator = personajes.iterator(); iterator.hasNext();) {

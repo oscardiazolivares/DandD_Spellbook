@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Hechizo armadura de mago.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class ArmaduraDeMago extends Hechizo implements Bonificante, Mostrable, AlcanceDefinible{
 
 	public ArmaduraDeMago() {

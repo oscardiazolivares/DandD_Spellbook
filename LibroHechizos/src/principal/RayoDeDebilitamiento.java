@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Hechizo "Rayo de debilitamiento"
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class RayoDeDebilitamiento extends Hechizo implements Hiriente, Mostrable, AlcanceDefinible{
 
 	public RayoDeDebilitamiento() {

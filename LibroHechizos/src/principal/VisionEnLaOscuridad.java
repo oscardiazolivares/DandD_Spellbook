@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Hechizo "Vision en la oscuridad"
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class VisionEnLaOscuridad extends Hechizo implements AlcanceDefinible, Mostrable {
 
 	public VisionEnLaOscuridad() {

@@ -1,5 +1,10 @@
 package principal;
 
+/**
+ * Hechizo "Toque vampírico". Este hechizo es tanto Hiriente como Bonificante.
+ * @author Óscar Díaz Olivares
+ * @version 1.0
+ */
 public class ToqueVampirico extends Hechizo implements AlcanceDefinible, Bonificante, Mostrable, Hiriente {
 
 	/**
