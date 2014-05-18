@@ -12,18 +12,21 @@ import java.awt.Window.Type;
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Dialog.ModalExclusionType;
 
 public class LanzamientoHechizo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextPane txtpnBolaDeFuego;
+	private JTextPane txtpane;
 	private JPanel buttonPane;
 	private JButton okButton;
 
 	/**
 	 * Create the dialog.
 	 */
-	public LanzamientoHechizo(String mensajeMostrado) {
+	public LanzamientoHechizo(String mensajeMostrado, String titulo) {
+		setTitle(titulo);
+		setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
 		setModal(true);
 		setType(Type.POPUP);
 		setBounds(100, 100, 450, 192);
@@ -32,10 +35,10 @@ public class LanzamientoHechizo extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		txtpnBolaDeFuego = new JTextPane();
-		txtpnBolaDeFuego.setText(mensajeMostrado);
-		txtpnBolaDeFuego.setBounds(12, 12, 410, 101);
-		contentPanel.add(txtpnBolaDeFuego);
+		txtpane = new JTextPane();
+		txtpane.setText(mensajeMostrado);
+		txtpane.setBounds(12, 12, 410, 101);
+		contentPanel.add(txtpane);
 		{
 			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

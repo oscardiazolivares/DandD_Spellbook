@@ -62,7 +62,7 @@ public class DetalleHechizo extends JInternalFrame {
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblImage = new JLabel(new ImageIcon("F:\\Users\\oscar\\git\\DandD_Spellbook\\LibroHechizos\\media\\boladefuego.png"));
+		JLabel lblImage = new JLabel(new ImageIcon(this.hechizo.getRutaImagen()));
 		lblImage.setBounds(12, 24, 150, 150);
 		panel.add(lblImage);
 		
@@ -172,7 +172,7 @@ public class DetalleHechizo extends JInternalFrame {
 					e.printStackTrace();
 				}
 				try {
-					LanzamientoHechizo dialog = new LanzamientoHechizo(((Mostrable)hechizo).mostrarResolucion());
+					LanzamientoHechizo dialog = new LanzamientoHechizo(((Mostrable)hechizo).mostrarResolucion(), hechizo.getNombre());
 					//Control de tipos de hechizo
 					if (hechizo instanceof Bonificante) {
 						((Bonificante) hechizo).bonificarPersonaje(Principal.personajes.get(indicePj));

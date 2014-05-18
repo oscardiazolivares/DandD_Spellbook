@@ -172,49 +172,54 @@ public class DetallePersonaje extends JInternalFrame {
 		
 		//Guardar el personaje
 
-				btnGuardarPj.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						
-						//Valida los valores de los componentes gráficos
-						
-						//Crea nuevo personaje con los valores de los componentes gráficos
-						Personaje pjModificado = new Personaje(
-								textField_nombre.getText(),
-								(Raza) comboBox_raza.getSelectedItem(),
-								(Clase) comboBox_clase.getSelectedItem(),
-								(int) spNivel.getValue(),
-								textField_alineamiento.getText(),
-								(int) spFue.getValue(),
-								(int) spDes.getValue(),
-								(int) spCon.getValue(),
-								(int) spInt.getValue(),
-								(int) spSab.getValue(),
-								(int) spCar.getValue(),
-								(int) spCa.getValue(),
-								(int) spPg.getValue(),
-								(int) spAtaqueBase.getValue() );
-						
-						//Extrae los conj. preparados de la interfaz y los pasa al personaje
-						ArrayList<Hechizo> preparados = new ArrayList<Hechizo>();
-						Hechizo aux;
-						for (int i = 0; i < conjPreparados.getSize(); i++) {
-							aux=conjPreparados.get(i);
-							preparados.add(aux);
-						}
-						pjModificado.setConjurosPreparados(preparados);
-						
-						//Define los conj.diarios del nuevo personaje en base a los del anterior:
-						pjModificado.setConjurosDiarios(pj.getConjurosDiarios());
-						
-						
-						//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
-						if (Principal.añadirPj(pjModificado)) {
-							Principal.eliminarPj(indicePj);
-							dispose();
-						}
-						
-					}
-				});
+		btnGuardarPj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//Valida los valores de los componentes gráficos
+				
+				//Crea nuevo personaje con los valores de los componentes gráficos
+				Personaje pjModificado = new Personaje(
+						textField_nombre.getText(),
+						(Raza) comboBox_raza.getSelectedItem(),
+						(Clase) comboBox_clase.getSelectedItem(),
+						(int) spNivel.getValue(),
+						textField_alineamiento.getText(),
+						(int) spFue.getValue(),
+						(int) spDes.getValue(),
+						(int) spCon.getValue(),
+						(int) spInt.getValue(),
+						(int) spSab.getValue(),
+						(int) spCar.getValue(),
+						(int) spCa.getValue(),
+						(int) spPg.getValue(),
+						(int) spAtaqueBase.getValue() );
+				
+				//Extrae los conj. preparados de la interfaz y los pasa al personaje
+				ArrayList<Hechizo> preparados = new ArrayList<Hechizo>();
+				Hechizo aux;
+				for (int i = 0; i < conjPreparados.getSize(); i++) {
+					aux=conjPreparados.get(i);
+					preparados.add(aux);
+				}
+				pjModificado.setConjurosPreparados(preparados);
+				
+				//Si no ha cambiado el nivel, define los conj.diarios del nuevo personaje en base a los del anterior:
+				if (pjModificado.getNivel()==pj.getNivel()) {
+					pjModificado.setConjurosDiarios(pj.getConjurosDiarios());
+				} else { //Si ha cambiado, entonces se recalculan y se borran los conj.preparados
+					pjModificado.setConjurosDiarios();
+					pjModificado.setConjurosPreparados(new ArrayList<Hechizo>());
+				}
+				
+				
+				//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
+				if (Principal.añadirPj(pjModificado)) {
+					Principal.eliminarPj(indicePj);
+					dispose();
+				}
+				
+			}
+		});
 		
 	}
 	

@@ -119,6 +119,7 @@ public class Principal extends JFrame {
 		
 		mntmSave = new JMenuItem("Guardar");
 		mnFile.add(mntmSave);
+		mntmSave.setEnabled(false);
 		
 		mntmSaveAs = new JMenuItem("Guardar como...");
 		mnFile.add(mntmSaveAs);
@@ -199,6 +200,7 @@ public class Principal extends JFrame {
 		//Guardar como...
 		mntmSaveAs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
 				selectorFichero = new JFileChooser();
 				int seleccion = selectorFichero.showSaveDialog(contentPane);
 				File file = selectorFichero.getSelectedFile();
@@ -206,10 +208,20 @@ public class Principal extends JFrame {
 					try {
 						fichero = new Fichero(file.getCanonicalPath());
 						fichero.guardarFichero(personajes);
+						// Hasta que no se pulsa "Guardar como..." y no termina satisfactoriamente, no tenemos un path para el
+						// fichero, y por tanto no se puede activar el botón "Guardar" hasta este momento.
+						mntmSave.setEnabled(true);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
+			}
+		});
+		
+		//Guardar
+		mntmSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				fichero.guardarFichero(personajes);
 			}
 		});
 		
@@ -224,6 +236,7 @@ public class Principal extends JFrame {
 					try {
 						fichero = new Fichero(file.getCanonicalPath());
 						personajes = fichero.leerFichero();
+						modelPersonajes.clear(); //Borra el listModel
 						cargarListModel();
 					} catch (IOException e1) {
 						e1.printStackTrace();

@@ -253,7 +253,12 @@ public class Personaje implements Serializable{
 	}
 	
 	/**
-	 * Método que suma dos vectores de longitud 10, de valores enteros y positivos.
+	 * Método que suma dos vectores de longitud 10, de valores enteros y positivos, teniendo en cuenta que si un
+	 * elemento del primer vector es 0, la suma de ese elemento con cualquier otro del segundo vector dará 0. Esto es
+	 * así para evitar que a un mago se le cuenten los conj. adicionales (CONJUROS_ADICIONALES) de un nivel que no puede
+	 * lanzar aún (CONJUROS_DIARIOS). Por ejemplo, evitaría que un mago de 1er nivel con INT 18 lanzara hechizos de 3er
+	 * nivel (le corresponde 1 adiciona de 3er nivel por INT 18).
+	 * 
 	 * @param v1
 	 * @param v2
 	 * @return
@@ -263,7 +268,11 @@ public class Personaje implements Serializable{
 		int[] resultado = new int[10];
 		
 		for (int i = 0; i < v1.length; i++) {
-			resultado[i]=v1[i]+v2[i];
+			if (v1[i]==0) {
+				resultado[i]=0;
+			} else {
+				resultado[i]=v1[i]+v2[i];
+			}
 		}
 		
 		return resultado;

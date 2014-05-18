@@ -13,7 +13,7 @@ public class RayoDeDebilitamiento extends Hechizo implements Hiriente, Mostrable
 				"De tu mano surge un rayo de gran fulgor con el que podrás alcanzar a un oponente si tienes éxito en un ataque de toque a "
 				+ "distancia. El receptor sufrirá una penalización en su puntuación de Fuerza igual a 1d6+1 por cada dos nmiveles de lanzador"
 				+ " (max 1d6+5). La Fuerza del receptor no puede quedar reducida por debajo de 1.",
-				TiempoLanzamiento.ESTANDAR, "1 min/nivel", "Ninguna");
+				TiempoLanzamiento.ESTANDAR, "1 min/nivel", "Ninguna", "media\\boladefuego.png");
 	}
 
 	@Override

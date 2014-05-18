@@ -50,22 +50,29 @@ public class Hechizo implements AlcanceDefinible{
 	 * Nivel de clase del personaje que lanza el conjuro
 	 */
 	protected int nivelDelLanzador;
+	/**
+	 * Ruta relativa de la imagen del hechizo
+	 */
+	private String rutaImagen;
 	
 
 	/**
+	 * 
 	 * @param nombre
 	 * @param escuela
 	 * @param subescuela
 	 * @param descriptor
-	 * @param nivelMago
+	 * @param nivelConjuro
 	 * @param componentes
 	 * @param descripcion
 	 * @param tiempoLanzamiento
-	 * @param alcance
+	 * @param duracion
+	 * @param ts
+	 * @param rutaImagen
 	 */
 	public Hechizo(String nombre, Escuela escuela, String subescuela,
 			Descriptor descriptor, int nivelConjuro, Componente[] componentes,
-			String descripcion, TiempoLanzamiento tiempoLanzamiento, String duracion, String ts) {
+			String descripcion, TiempoLanzamiento tiempoLanzamiento, String duracion, String ts, String rutaImagen) {
 		super();
 		this.nombre = nombre;
 		this.escuela = escuela;
@@ -77,7 +84,7 @@ public class Hechizo implements AlcanceDefinible{
 		this.tiempoLanzamiento = tiempoLanzamiento;
 		this.duracion=duracion;
 		this.ts=ts;
-		//this.nivelDelLanzador=nivel;
+		this.rutaImagen=rutaImagen;
 	}
 
 	/**
@@ -155,6 +162,13 @@ public class Hechizo implements AlcanceDefinible{
 	 */
 	public int getNivelDelLanzador() {
 		return nivelDelLanzador;
+	}
+
+	/**
+	 * @return Devuelve el valor del atributo rutaImagen
+	 */
+	public String getRutaImagen() {
+		return rutaImagen;
 	}
 
 	/**
