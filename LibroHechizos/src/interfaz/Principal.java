@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -278,7 +279,14 @@ public class Principal extends JFrame {
 			}
 		});
 		
-		
+		abrirFicheroInicial();
+	}
+	
+	private void abrirFicheroInicial() {
+		fichero = new Fichero("saves//personajesPrueba");
+		personajes = fichero.leerFichero();
+		modelPersonajes.clear(); //Borra el listModel
+		cargarListModel();
 	}
 	
 	private void cargarListModel() {
