@@ -104,9 +104,6 @@ public class Principal extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(2, 50, 1000, 700);
 		
-		//Carga el nuevo personaje en el arraylist
-		personajes.add(new Personaje("Norgalis", Raza.HUMANO, Clase.MAGO, 9, "CAO-BUE", 9, 16, 15, 20, 12, 10, 18, 51, 6));
-		
 		//Carga los hechizos existentes
 		hechizos.add(new BolaDeFuego());
 		hechizos.add(new RayoDeDebilitamiento());
@@ -171,26 +168,26 @@ public class Principal extends JFrame {
 		
 		panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Personajes", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(12, 12, 237, 582);
+		panel.setBounds(12, 12, 280, 582);
 		desktopPane.add(panel);
 		panel.setLayout(null);
 		
 		listPersonajes = new JList<Personaje>();
-		listPersonajes.setBounds(12, 22, 213, 468);
+		listPersonajes.setBounds(12, 22, 256, 468);
 		panel.add(listPersonajes);
 		
 		cargarListModel();
 		
 		JButton btnAadir = new JButton("Nuevo");
-		btnAadir.setBounds(12, 502, 98, 26);
+		btnAadir.setBounds(12, 502, 115, 26);
 		panel.add(btnAadir);
 		
 		JButton btnMostrar = new JButton("Mostrar");
-		btnMostrar.setBounds(127, 502, 98, 68);
+		btnMostrar.setBounds(139, 502, 129, 68);
 		panel.add(btnMostrar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(12, 544, 98, 26);
+		btnEliminar.setBounds(12, 544, 115, 26);
 		panel.add(btnEliminar);
 		
 		//Mostrar pj
@@ -279,6 +276,7 @@ public class Principal extends JFrame {
 			}
 		});
 		
+		//Abre el fichero por defecto con personajes
 		abrirFicheroInicial();
 	}
 	/**
@@ -308,7 +306,7 @@ public class Principal extends JFrame {
 	 * @param pjNuevo
 	 * @return true si se ha añadido satisfactoriamente. False en otro caso.
 	 */
-	static boolean añadirPj(Personaje pjNuevo) {
+	static boolean anyadirPj(Personaje pjNuevo) {
 		
 		if (personajes.add(pjNuevo)) {
 			modelPersonajes.addElement(pjNuevo);

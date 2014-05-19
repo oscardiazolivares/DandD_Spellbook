@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import principal.BolaDeFuego;
 import principal.Clase;
 import principal.Hechizo;
+import principal.OrdenarHechizo;
 import principal.Personaje;
 import principal.Raza;
 
@@ -32,6 +33,7 @@ import java.awt.color.CMMException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -154,7 +156,7 @@ public class DetallePersonaje extends JInternalFrame {
 				
 		this.indicePj=indicePj;
 		this.pj=personaje;
-		setTitle(pj.getNombre() + ": " + pj.getClase().getNombre() + " de nivel " + pj.getNivel());
+		setTitle(pj.getNombre() + ": " + pj.getClase().getNombre() + " de nivel " + pj.getNivel() + "(ID: " + pj.ID +")");
 		setIconifiable(true);
 		setClosable(true);
 		setBounds(100, 100, 853, 419);
@@ -224,6 +226,9 @@ public class DetallePersonaje extends JInternalFrame {
 						aux=conjPreparados.get(i);
 						preparados.add(aux);
 					}
+					//Ordena por nivel los conj. preparados
+					Collections.sort(preparados, new OrdenarHechizo());
+					
 					pjModificado.setConjurosPreparados(preparados);
 					
 					//Si no ha cambiado el nivel, define los conj.diarios del nuevo personaje en base a los del anterior:
@@ -236,7 +241,7 @@ public class DetallePersonaje extends JInternalFrame {
 					
 					
 					//Introduce el personaje creado en el arraylist de personajes, y elimina el anterior.
-					if (Principal.añadirPj(pjModificado)) {
+					if (Principal.anyadirPj(pjModificado)) {
 						Principal.eliminarPj(indicePj);
 						dispose();
 					}
@@ -318,15 +323,12 @@ public class DetallePersonaje extends JInternalFrame {
 					
 					
 					//Introduce el personaje creado en el arraylist de personajes
-					if (Principal.añadirPj(pjModificado)) {
+					if (Principal.anyadirPj(pjModificado)) {
 						dispose();
 					}
 				}
 			}
 		});
-		
-		//Desactivamos la parte de hechizos cuando creamos un nuevo pj, ya que necesita su nivel para poder añadir hechizos.
-		panel_Conjuros.setVisible(false);
 	}
 	/**
  	* Actualiza los labels que representan los conj. diarios que quedan por gastar.

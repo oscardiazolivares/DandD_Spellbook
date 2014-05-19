@@ -12,6 +12,15 @@ import java.util.ArrayList;
 public class Personaje implements Serializable{
 
 	/**
+	 * Ultimo ID asignado a un objeto de la clase.
+	 */
+	private static long ultimoId;
+	/**
+	 * ID único del objeto.
+	 */
+	public final long ID;
+	
+	/**
 	 * Tabla de conjuros diarios para mago por nivel de lanzador. 
 	 * Columnas - niveles de conjuro, del 0 al 9.
 	 * Filas - nivel de lanzador
@@ -122,7 +131,10 @@ public class Personaje implements Serializable{
 	public Personaje(String nombre, Raza raza, Clase clase, int nivel, String alineamiento, int fuerza,
 			int destreza, int constitucion, int inteligencia, int sabiduria, int carisma, int ca, int pg,
 			int ataqueBase) {
-
+		
+		//Asigna el ID al objeto, en función del último añadido.
+		this.ID = ++ultimoId;
+		
 		// Asignación de valores recibidos
 		setNombre(nombre);
 		setRaza(raza);
@@ -248,7 +260,7 @@ public class Personaje implements Serializable{
 			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModInt()]);
 		} else { 
 			//Sino, es hechicero, y sus conj. adicionales depende de su modificador de Sabiduria
-			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModSab()]);
+			return sumaVectores(auxiliar,CONJUROS_ADICIONALES[getModCar()]);
 		}
 	}
 	

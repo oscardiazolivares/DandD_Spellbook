@@ -1,13 +1,14 @@
 package principal;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  * Clase básica de la que heredan los hechizos concretos. No se instancia.
  * @author Óscar Díaz Olivares
  * @version 1.0
  */
-public class Hechizo implements AlcanceDefinible, Serializable{
+public class Hechizo implements AlcanceDefinible, Serializable, Comparable<Hechizo>{
 
 	/**
 	 * Nombre normal del hechizo
@@ -202,5 +203,12 @@ public class Hechizo implements AlcanceDefinible, Serializable{
 		// TODO Auto-generated method stub
 		
 	}
+	/**
+	 * Método del interfaz comparable para ordenar los hechizos por nombre
+	 */
+	public int compareTo(Hechizo conj) {
+		return (this.nombre).compareTo(conj.nombre);
+	}
+
 	
 }
