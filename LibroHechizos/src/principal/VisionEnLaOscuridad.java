@@ -18,7 +18,7 @@ public class VisionEnLaOscuridad extends Hechizo implements AlcanceDefinible, Mo
 				"El receptor obtiene la aptitud de poder ver hasta 60' de distancia incluso en la oscuridad total. La visión en la "
 				+ "oscuridad sólo permite ver en blanco y negro, pero, por lo demás, es igual que la vista normal. Este tipo de "
 				+ "visión no concede la aptitud de ver en la oscuridad mágica.",
-				TiempoLanzamiento.ESTANDAR, "1 h/nivel", "Voluntad niega", "media//verenlaoscuridad.png");
+				TiempoLanzamiento.ESTANDAR, "1 h/nivel", "Voluntad niega", "media//visionenlaoscuridad.png");
 	}
 
 	@Override
